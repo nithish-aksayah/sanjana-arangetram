@@ -6,6 +6,8 @@ const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SHEETS_SCRIPT_URL;
 
 /**
  * Submits data to Google Sheets
+ * 
+ * 
  * @param {Object} data - The data payload to send
  * @returns {Promise<Response>}
  */
@@ -18,10 +20,8 @@ export const submitToGoogleSheets = async (data) => {
   try {
     const response = await fetch(GOOGLE_SCRIPT_URL, {
       method: "POST",
-      mode: "no-cors", // Required for Google Apps Script redirects
-      headers: {
-        "Content-Type": "application/json",
-      },
+      mode: "no-cors",
+      cache: "no-cache",
       body: JSON.stringify(data),
     });
     
