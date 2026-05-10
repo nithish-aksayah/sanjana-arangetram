@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { invitationData } from '../../data/content';
 
 const Hero = () => {
+  const navigate = useNavigate();
   const images = invitationData.hero.sliderImages || [
     '/images/Sanjana-glimpse-01.webp',
     '/images/Sanjana-glimpse-03.webp',
@@ -75,13 +77,13 @@ const Hero = () => {
               className="flex flex-col sm:flex-row items-center lg:items-start gap-5"
             >
               <button 
-                onClick={() => document.getElementById('rsvp')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => navigate('/rsvp')}
                 className="btn-premium w-full sm:w-auto"
               >
                 RSVP Now
               </button>
               <button 
-                onClick={() => document.getElementById('invitation')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => navigate('/invitation')}
                 className="btn-outline-premium w-full sm:w-auto"
               >
                 View Invitation

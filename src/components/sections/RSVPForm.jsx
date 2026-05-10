@@ -1,90 +1,67 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { invitationData } from '../../data/content';
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../firebase/config";
+import { submitToGoogleSheets } from "../../services/googleSheets";
 import { Send, User, Users, MessageSquare, Phone, Mail, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
-import { db } from '../../firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 const RSVPForm = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    attendance: 'yes',
-    guests: '1',
-    message: ''
-  });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [guests, setGuests] = useState("");
+  const [attendingStatus, setAttendingStatus] = useState("yes");
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState({ type: '', message: '' });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setStatus({ type: '', message: '' });
+    if (loading) return; // Prevent duplicate submissions
 
     try {
-      // Basic validation
-      if (!formData.name || !formData.phone) {
-        throw new Error('Name and Phone Number are required.');
-      }
+      setLoading(true);
+      setStatus({ type: '', message: '' });
 
-      await addDoc(collection(db, 'rsvps'), {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        guests: formData.attendance === 'no' ? 0 : (parseInt(formData.guests) || 1),
-        attendingStatus: formData.attendance,
-        message: formData.message,
-        timestamp: serverTimestamp()
+      const payload = {
+        name,
+        email,
+        phone,
+        guests: attendingStatus === 'no' ? 0 : (parseInt(guests) || 1),
+        attendingStatus,
+        message,
+        createdAt: new Date(),
+      };
+
+      // 1. FIREBASE SAVE
+      await addDoc(collection(db, "rsvps"), payload);
+
+      // 2. GOOGLE SHEET SAVE (via reusable service)
+      await submitToGoogleSheets({
+        ...payload,
+        type: "rsvp",
+        status: attendingStatus
       });
-      
-      // Sync with Google Sheets
-      try {
-        await fetch('https://script.google.com/macros/s/AKfycbzVZecBYMdsjpvhEd6Bg6Ma8Fa-Nkd6CdJydhQf8V31tp4S460SnUZdGGPN42vjnw_i/exec', {
-          method: 'POST',
-          mode: 'no-cors', // Essential for Google Apps Script redirects
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            type: "rsvp",
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            guests: formData.attendance === 'no' ? 0 : (parseInt(formData.guests) || 1),
-            attendingStatus: formData.attendance,
-            message: formData.message
-          })
-        });
-      } catch (sheetError) {
-        console.error('Google Sheets Sync Error:', sheetError);
-        // We don't throw here to ensure the user still sees the Firebase success
-      }
 
       setStatus({ 
         type: 'success', 
-        message: 'Thank you! Your RSVP has been submitted successfully.' 
+        message: 'RSVP Submitted Successfully!' 
       });
-      
-      // Reset form
-      setFormData({
-        name: '',
-        phone: '',
-        email: '',
-        attendance: 'yes',
-        guests: '1',
-        message: ''
-      });
+
+      // Clear form
+      setName("");
+      setEmail("");
+      setPhone("");
+      setGuests("");
+      setAttendingStatus("yes");
+      setMessage("");
+
     } catch (error) {
-      console.error('Error submitting RSVP:', error);
+      console.error("Submission Error:", error);
       setStatus({ 
         type: 'error', 
-        message: error.message || 'Something went wrong. Please try again later.' 
+        message: 'Something went wrong. Please try again later.' 
       });
     } finally {
       setLoading(false);
@@ -150,8 +127,8 @@ const RSVPForm = () => {
                         required
                         className="w-full bg-white/5 border border-white/10 rounded-sm py-4 pl-12 pr-4 text-white focus:outline-none focus:border-gold/50 transition-colors"
                         placeholder="Your Name"
-                        value={formData.name}
-                        onChange={handleChange}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                       />
                     </div>
                   </div>
@@ -160,8 +137,8 @@ const RSVPForm = () => {
                     <select 
                       name="attendance"
                       className="w-full bg-white/5 border border-white/10 rounded-sm py-4 px-4 text-white focus:outline-none focus:border-gold/50 transition-colors appearance-none cursor-pointer"
-                      value={formData.attendance}
-                      onChange={handleChange}
+                      value={attendingStatus}
+                      onChange={(e) => setAttendingStatus(e.target.value)}
                     >
                       <option value="yes" className="bg-[#111]">Yes, I'll be there</option>
                       <option value="no" className="bg-[#111]">No, unfortunately I can't</option>
@@ -180,8 +157,8 @@ const RSVPForm = () => {
                         required
                         className="w-full bg-white/5 border border-white/10 rounded-sm py-4 pl-12 pr-4 text-white focus:outline-none focus:border-gold/50 transition-colors"
                         placeholder="+1 (000) 000-0000"
-                        value={formData.phone}
-                        onChange={handleChange}
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
                       />
                     </div>
                   </div>
@@ -195,8 +172,8 @@ const RSVPForm = () => {
                         min="1"
                         max="10"
                         className="w-full bg-white/5 border border-white/10 rounded-sm py-4 pl-12 pr-4 text-white focus:outline-none focus:border-gold/50 transition-colors"
-                        value={formData.guests}
-                        onChange={handleChange}
+                        value={guests}
+                        onChange={(e) => setGuests(e.target.value)}
                       />
                     </div>
                   </div>
@@ -211,8 +188,8 @@ const RSVPForm = () => {
                       name="email"
                       className="w-full bg-white/5 border border-white/10 rounded-sm py-4 pl-12 pr-4 text-white focus:outline-none focus:border-gold/50 transition-colors"
                       placeholder="email@example.com"
-                      value={formData.email}
-                      onChange={handleChange}
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
                 </div>
@@ -225,8 +202,8 @@ const RSVPForm = () => {
                       name="message"
                       className="w-full bg-white/5 border border-white/10 rounded-sm py-4 pl-12 pr-4 text-white focus:outline-none focus:border-gold/50 transition-colors min-h-[120px] resize-none"
                       placeholder="Your wishes or special notes..."
-                      value={formData.message}
-                      onChange={handleChange}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
                     />
                   </div>
                 </div>
