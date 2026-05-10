@@ -141,33 +141,6 @@ export const invitationData = {
     description: "Join us virtually to witness Sanjana's Arangetram. The live stream link will be available here on the day of the event.",
   },
   guestbook: [
-    {
-      name: "Diddige Family",
-      location: "Atlanta",
-      date: "May 5, 2024",
-      time: "10:15 am",
-      message: "We are so proud of your dedication and hard work, Sanjana! Watching you grow as a dancer has been a beautiful journey. We can't wait to see you shine on stage for your Arangetram."
-    },
-    {
-      name: "Sowmya & Ramesh",
-      location: "Cumming, GA",
-      date: "May 2, 2024",
-      time: "4:30 pm",
-      message: "Congratulations Sanjana! Your passion for Bharatanatyam is truly inspiring. We've seen the hours of practice you've put in, and we know your performance will be breathtaking. All the best!"
-    },
-    {
-      name: "Kruti Dance Academy Team",
-      location: "Duluth",
-      date: "April 28, 2024",
-      time: "11:20 am",
-      message: "It has been a pleasure teaching you and watching your technique evolve, Sanjana. You carry the grace and discipline of a true artist. We are excited for your debut!"
-    },
-    {
-      name: "Anika & Meera",
-      location: "South Forsyth",
-      date: "April 20, 2024",
-      time: "6:15 pm",
-      message: "Go Sanjana! We've seen you practicing in school and after class—your energy is amazing. Can't wait to cheer for you from the front row!"
-    }
+   
   ]
 };

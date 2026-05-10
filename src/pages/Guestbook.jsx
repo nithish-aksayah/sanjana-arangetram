@@ -3,6 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { User, MessageCircle, ChevronRight, X, Send, Loader2 } from 'lucide-react';
 import { invitationData } from '../data/content';
 import { Link } from 'react-router-dom';
+import { db } from '../firebase/config';
+import { 
+  collection, 
+  addDoc, 
+  query, 
+  orderBy, 
+  onSnapshot, 
+  serverTimestamp 
+} from 'firebase/firestore';
+import { submitToGoogleSheets } from '../services/googleSheets';
 
 const Guestbook = () => {
   const [entries, setEntries] = useState([]);
@@ -18,14 +28,30 @@ const Guestbook = () => {
   });
 
   useEffect(() => {
-    // Load static entries from data
-    const staticEntries = (invitationData.guestbook || []).map((entry, index) => ({
-      id: `static-${index}`,
-      ...entry,
-      displayDate: entry.date || 'May 2024'
-    }));
-    setEntries(staticEntries);
-    setLoading(false);
+    // Setup real-time listener for guestbook entries
+    const q = query(collection(db, 'guestbook'), orderBy('createdAt', 'desc'));
+    
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const guestbookEntries = [];
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        guestbookEntries.push({
+          id: doc.id,
+          ...data,
+          // Format date for display
+          displayDate: data.createdAt?.toDate ? data.createdAt.toDate().toLocaleDateString('en-US', { 
+            month: 'long', day: 'numeric', year: 'numeric' 
+          }) : 'Just now'
+        });
+      });
+      setEntries(guestbookEntries);
+      setLoading(false);
+    }, (error) => {
+      console.error("Error fetching guestbook:", error);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -33,8 +59,27 @@ const Guestbook = () => {
     setSubmitting(true);
 
     try {
-      // Simulate network delay
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // 1. Save to Firestore
+      await addDoc(collection(db, 'guestbook'), {
+        name: formData.name,
+        city: formData.city,
+        email: formData.email,
+        message: formData.message,
+        createdAt: serverTimestamp()
+      });
+      
+      // 2. Sync with Google Sheets
+      try {
+        await submitToGoogleSheets({
+          type: "guestbook",
+          name: formData.name,
+          email: formData.email,
+          city: formData.city,
+          message: formData.message
+        });
+      } catch (sheetError) {
+        console.error('Google Sheets Sync Error:', sheetError);
+      }
       
       setIsSubmitted(true);
       
@@ -44,6 +89,7 @@ const Guestbook = () => {
         setFormData({ name: '', city: '', email: '', message: '' });
       }, 2000);
     } catch (error) {
+      console.error("Error adding entry:", error);
       alert("Failed to add entry. Please try again.");
     } finally {
       setSubmitting(false);
