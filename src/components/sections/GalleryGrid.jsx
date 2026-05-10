@@ -85,10 +85,10 @@ const GallerySection = () => {
               <motion.div
                 key={item.url}
                 layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: (index % 6) * 0.1 }}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "0px 0px -50px 0px" }}
+                transition={{ duration: 0.4, delay: Math.min(index * 0.05, 0.3) }}
                 className="relative break-inside-avoid cursor-pointer group overflow-hidden rounded-xl bg-white/[0.03] border border-white/5 mb-8"
                 onClick={() => openLightbox(index)}
               >
@@ -97,11 +97,11 @@ const GallerySection = () => {
                   alt={item.title} 
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-auto object-cover transition-transform duration-700 md:group-hover:scale-110"
                 />
                 
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">
+                {/* Overlay - Hidden on mobile for better performance */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 md:group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">
                   <div className="flex items-center gap-2 text-[10px] text-white/50 uppercase tracking-[0.2em]">
                     <Maximize2 size={12} /> View Image
                   </div>

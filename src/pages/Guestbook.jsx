@@ -73,8 +73,6 @@ const Guestbook = () => {
         await submitToGoogleSheets({
           type: "guestbook",
           name: formData.name,
-          email: formData.email,
-          city: formData.city,
           message: formData.message
         });
       } catch (sheetError) {

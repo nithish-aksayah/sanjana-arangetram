@@ -37,12 +37,14 @@ const RSVPForm = () => {
       // 1. FIREBASE SAVE
       await addDoc(collection(db, "rsvps"), payload);
 
-      // 2. GOOGLE SHEET SAVE (via reusable service)
-      console.log("Sending to Google Sheets:", payload);
       await submitToGoogleSheets({
-        ...payload,
         type: "rsvp",
-        status: attendingStatus
+        name,
+        email,
+        phone,
+        guests,
+        attendingStatus,
+        message
       });
 
       setStatus({ 

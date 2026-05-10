@@ -93,9 +93,9 @@ const Hero = () => {
 
           {/* Right Image Column */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95, x: 30 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="w-full lg:w-1/2 relative order-1 lg:order-2"
           >
             <div className="relative aspect-[4/5] md:aspect-square lg:aspect-[4/5] max-h-[85vh] mx-auto overflow-hidden group">
@@ -107,14 +107,13 @@ const Hero = () => {
                   key={currentIndex}
                   src={images[currentIndex]}
                   alt={invitationData.event.dancerName}
-                  initial={{ opacity: 0, scale: 1.05 }} // Reduced initial scale for better mobile performance
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.98 }}
-                  transition={{ duration: 0.8 }} // Faster transition for snappier feel
-                  className="w-full h-full object-contain md:object-cover lg:object-contain relative z-10 drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+                  initial={{ opacity: 0 }} 
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="w-full h-full object-contain md:object-cover lg:object-contain relative z-10 drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
                   loading={currentIndex === 0 ? "eager" : "lazy"}
-                  decoding={currentIndex === 0 ? "sync" : "async"}
-                  fetchpriority={currentIndex === 0 ? "high" : "low"}
+                  decoding="sync"
                 />
               </AnimatePresence>
 
