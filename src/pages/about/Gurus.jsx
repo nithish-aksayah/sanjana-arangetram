@@ -55,12 +55,12 @@ const Gurus = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="relative z-10 aspect-[3/4] rounded-2xl overflow-hidden gold-border-gradient shadow-2xl"
+                className="relative z-10 aspect-[3/4] rounded-2xl overflow-hidden gold-border-gradient shadow-2xl transition-transform duration-500 group-hover:-translate-y-2"
               >
                 <img 
-                  src="/images/photo_8.webp" 
+                  src="/images/gurus/Dina Sheth.webp" 
                   alt="Guru Mrs. Dina Sheth" 
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000"
                 />
               </motion.div>
               {/* Decorative Frame */}
@@ -205,12 +205,12 @@ const Gurus = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="relative z-10 aspect-[3/4] rounded-2xl overflow-hidden gold-border-gradient shadow-2xl"
+                className="relative z-10 aspect-[3/4] rounded-2xl overflow-hidden gold-border-gradient shadow-2xl transition-transform duration-500 group-hover:-translate-y-2"
               >
                 <img 
-                  src="/images/photo_10.webp" 
+                  src="/images/gurus/Shemoni Parekh.webp" 
                   alt="Artistic Director Mrs. Shemoni Parekh" 
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000"
                 />
               </motion.div>
               <div className="absolute -top-6 -right-6 w-full h-full border border-gold/10 rounded-2xl -z-10 group-hover:top-0 group-hover:right-0 transition-all duration-700" />
