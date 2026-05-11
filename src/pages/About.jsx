@@ -25,68 +25,73 @@ const timeline = [
     year: '2012',
     title: 'The Beginning',
     description: 'Sanjana’s journey at Kruti Dance Academy began with Bollywood dance classes, where movement first became a source of joy, rhythm, and confidence.',
-    image: '/images/Sanjana-glimpse-01.webp',
+    image: '/images/Sanjana Website - My journey so far/Navin_7509312.webp',
     side: 'left',
+    objectPosition: 'center 20%'
   },
   {
     year: '2013',
     title: 'First Time on Stage',
     description: 'Performed in her very first recital at Kruti Dance Academy, experiencing the excitement of performing before an audience for the first time.',
-    image: '/images/Sanjana-glimpse-02.webp',
+    image: '/images/Sanjana Website - My journey so far/_GPJ4818 Copy.webp',
     side: 'right',
+    objectPosition: 'top center'
   },
   {
     year: '2013',
     title: 'Discovering Bharatanatyam',
     description: 'Began formal training in Bharatanatyam under the guidance of Guru Mrs. Dina Sheth, beginning a journey rooted in discipline, tradition, and storytelling.',
-    image: '/images/awards_and_certifications/Picture10.webp',
+    image: '/images/Sanjana Website - My journey so far/DSC_0417.webp',
     side: 'left',
-    objectPosition: 'center 30%'
+    objectPosition: 'center 10%'
   },
   {
     year: '2013',
     title: 'Ghungroo Pooja',
     description: 'Participated in her Ghungroo Pooja, a special milestone symbolizing dedication to the classical art form and the beginning of a deeper commitment to dance.',
-    image: '/images/awards_and_certifications/Picture11.webp',
+    image: '/images/Sanjana Website - My journey so far/IMG_9230.webp',
     side: 'right',
+    objectPosition: 'center 10%'
   },
   {
     year: '2014',
     title: 'First Bharatanatyam Recital',
     description: 'Performed in her first Bharatanatyam recital in classical costume. Also served as her first experience as an MC, beginning a growing comfort with stage presence.',
-    image: '/images/awards_and_certifications/Picture12.webp',
+    image: '/images/Sanjana Website - My journey so far/025-DSC_1306.webp',
     side: 'left',
-    objectPosition: 'center 40%'
+    objectPosition: 'center 30%'
   },
   {
     year: '2017',
     title: 'Growing Through the Art',
     description: 'Years of training in foundational pieces such as Pushpanjali and Alarippu introduced Sanjana to the rhythm, posture, and discipline that form the core of Bharatanatyam.',
-    image: '/images/awards_and_certifications/Picture13.webp',
+    image: '/images/Sanjana Website - My journey so far/0535_mb1040.webp',
     side: 'right',
+    objectPosition: 'center 20%'
   },
   {
     year: '2022',
     title: 'Beyond Technique',
     description: 'As training advanced into more complex repertoire, dance evolved into a source of resilience, confidence, and personal growth through artistic refinement.',
-    image: '/images/awards_and_certifications/Picture14.webp',
+    image: '/images/Sanjana Website - My journey so far/Copy of DSC_0283.webp',
     side: 'left',
-    objectPosition: 'center 35%',
+    objectPosition: 'center 20%',
   },
   {
     year: '2023',
     title: 'The Arangetram Journey',
     description: 'After completing the curriculum in middle school, Sanjana officially began arangetram training — entering a rigorous phase of refinement and artistic maturity.',
-    image: '/images/awards_and_certifications/Picture15.webp',
+    image: '/images/Sanjana Website - My journey so far/IMG_4032.webp',
     side: 'right',
+    objectPosition: ''
   },
   {
     year: '2026',
     title: 'Arangetram — The Debut',
     description: 'After years of devotion, discipline, and guidance from her gurus, Sanjana presents her arangetram debut performance on July 25, 2026, at Gas South Theater.',
-    image: '/images/Sanjana-glimpse-04.webp',
+    image: '/images/photo_8.webp',
     side: 'left',
-    objectPosition: 'center 17%',
+    objectPosition: 'center 10%',
   },
 ];
 
@@ -275,21 +280,22 @@ const About = () => {
                 label: 'Life Philosophy',
                 heading: 'Aut Inveniam Viam Aut Faciam',
                 body: 'I didn\'t go searching for a life philosophy; I stumbled into one during arangetram practice — somewhere between exhausted calves, relentless adavus, and late-night desperation.\nA single Latin phrase stayed with me: Aut inveniam viam aut faciam — “I shall either find a way or make one.Over time, Bharatanatyam taught me that perseverance is not about perfection. It is about continuing through exhaustion, repetition, doubt, and discipline — returning each day to grow a little further through the art.”\n',
-                image: '/images/Sanjana-glimpse-04.webp',
+                image: '/images/Sanjana Website - Arageetram photoshoot glimpses/Sanjana-691-Edit.webp',
+                objectPosition: "top 30%"
               },
               {
                 icon: '❋',
                 label: 'My Mission',
                 heading: 'Preserving Tradition Through Practice',
                 body: 'Through Bharatanatyam, I have remained deeply connected to my cultural roots while learning the value of discipline, devotion, and artistic expression. I believe traditions survive not simply because they are remembered, but because they are continuously practiced, shared, and carried forward through each generation.',
-                image: '/images/Sanjana-glimpse-03.webp',
+                image: '/images/Sanjana Website - Arageetram photoshoot glimpses/Sanjana-326-Edit_evotobak_(2).webp',
               },
               {
                 icon: '◈',
                 label: 'My Passion',
                 heading: 'The Language of Movement',
                 body: 'What draws me most to Bharatanatyam is its ability to tell stories through rhythm, expression, and movement. From portraying devotion and courage to joy and longing, dance becomes a language capable of expressing emotions words often cannot.Through abhinaya, I have come to love the power of storytelling woven through classical movement and music.',
-                image: '/images/Sanjana-glimpse-02.webp',
+                image: '/images/Sanjana Website - Arageetram photoshoot glimpses/Sanjana-51-Edit.webp',
               },
             ].map((card, i) => (
               <motion.div
@@ -300,11 +306,12 @@ const About = () => {
                 transition={{ duration: 0.7, delay: i * 0.15 }}
                 className="glass-card gold-border-gradient overflow-hidden group"
               >
-                <div className="h-56 overflow-hidden">
+                <div className="h-[320px] overflow-hidden">
                   <img
                     src={card.image}
                     alt={card.heading}
-                    className="w-full h-full object-cover object-[center_top] group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    style={{ objectPosition: card.objectPosition || 'center 45%' }}
                     loading="lazy"
                     decoding="async"
                   />
@@ -365,7 +372,7 @@ const About = () => {
                   {/* Card */}
                   <div className="w-full md:w-[45%]">
                     <div className="glass-card gold-border-gradient overflow-hidden group">
-                      <div className="h-[220px] overflow-hidden">
+                      <div className="h-[320px] overflow-hidden">
                         <img
                           src={item.image}
                           alt={item.title}
