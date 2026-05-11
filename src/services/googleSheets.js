@@ -13,8 +13,9 @@ const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SHEETS_SCRIPT_URL;
  */
 export const submitToGoogleSheets = async (data) => {
   if (!GOOGLE_SCRIPT_URL) {
-    console.error("Google Sheets Script URL is not defined in environment variables.");
-    return;
+    const errorMsg = "Google Sheets Script URL is not defined in environment variables. Please check your production configuration.";
+    console.error(errorMsg);
+    throw new Error(errorMsg);
   }
 
   try {

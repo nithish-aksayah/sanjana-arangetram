@@ -37,15 +37,22 @@ const RSVPForm = () => {
       // 1. FIREBASE SAVE
       await addDoc(collection(db, "rsvps"), payload);
 
-      await submitToGoogleSheets({
-        type: "rsvp",
-        name,
-        email,
-        phone,
-        guests,
-        attendingStatus,
-        message
-      });
+      // 2. GOOGLE SHEETS SYNC
+      try {
+        await submitToGoogleSheets({
+          type: "rsvp",
+          name,
+          email,
+          phone,
+          guests,
+          attendingStatus,
+          message
+        });
+      } catch (sheetError) {
+        console.error("Google Sheets Sync Error:", sheetError);
+        // We still consider the RSVP successful if Firebase worked, 
+        // but we might want to warn or log it.
+      }
 
       setStatus({ 
         type: 'success', 
