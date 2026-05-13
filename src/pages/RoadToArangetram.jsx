@@ -61,8 +61,7 @@ const RoadToArangetram = () => {
       {/* SECTION WRAPPER TO CONTROL GAPS */}
       <div className="relative">
         
-        {/* Vertical Journey Line */}
-        <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-gold/50 via-gold/10 to-gold/50 opacity-20 hidden md:block" />
+        {/* Vertical Journey Line removed as requested */}
 
         {/* 2. REHEARSALS SECTION */}
         <section className="py-20 relative">
