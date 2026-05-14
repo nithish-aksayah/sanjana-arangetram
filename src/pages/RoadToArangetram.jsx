@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, Clock, Heart, ChevronDown, Quote, Music, BookOpen } from 'lucide-react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, EffectFade } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/effect-fade';
 
 const RoadToArangetram = () => {
   const [daysLeft, setDaysLeft] = useState(0);
@@ -29,7 +33,7 @@ const RoadToArangetram = () => {
       {/* 1. HERO SECTION */}
       <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-[url('/images/Sanjana-glimpse-05.webp')] bg-cover bg-center opacity-40 scale-110" />
+          <div className="absolute inset-0 bg-[url('/images/sanjana%20website%20-%20Road%20to%20arangetram/IMG_2759.jpg')] bg-cover bg-center opacity-40 scale-110" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black" />
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
         </div>
@@ -92,7 +96,28 @@ const RoadToArangetram = () => {
                 className="relative group"
               >
                 <div className="aspect-[4/3] glass-card gold-border-gradient overflow-hidden">
-                  <img src="/images/photo_8.webp" alt="Practice" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" />
+                  <Swiper
+                    modules={[Autoplay, EffectFade]}
+                    effect="fade"
+                    autoplay={{ delay: 3000, disableOnInteraction: false }}
+                    loop={true}
+                    className="w-full h-full"
+                  >
+                    {[
+                      'IMG_2621.jpg',
+                      'IMG_2759.jpg',
+                      'IMG_2763.jpg',
+                      'IMG_2782.jpg'
+                    ].map((img, idx) => (
+                      <SwiperSlide key={idx}>
+                        <img 
+                          src={`/images/sanjana website - Road to arangetram/${img}`} 
+                          alt={`Practice ${idx + 1}`} 
+                          className="w-full h-full object-cover transition-transform duration-1000" 
+                        />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
                 </div>
                 <div className="absolute -top-4 -right-4 text-8xl font-serif text-gold/5 -z-10">01</div>
               </motion.div>
@@ -112,7 +137,7 @@ const RoadToArangetram = () => {
                 className="order-2 lg:order-1"
               >
                 <div className="aspect-square glass-card gold-border-gradient overflow-hidden">
-                  <img src="/images/awards_and_certifications/Picture23.webp" alt="Details" className="w-full h-full object-cover grayscale opacity-60" />
+                  <img src="/images/sanjana website - Road to arangetram/IMG_2782.jpg" alt="Details" className="w-full h-full object-cover opacity-60" />
                 </div>
               </motion.div>
               <motion.div 
@@ -190,7 +215,7 @@ const RoadToArangetram = () => {
                 viewport={{ once: true }}
                 className="glass-card gold-border-gradient p-4"
               >
-                <img src="/images/Invitation.webp" alt="Invitation" className="w-full h-full object-cover shadow-2xl" />
+                <img src="/images/sanjana website - Road to arangetram/IMG_2763.jpg" alt="Invitation" className="w-full h-full object-cover shadow-2xl" />
               </motion.div>
             </div>
           </div>

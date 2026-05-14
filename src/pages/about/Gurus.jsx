@@ -1,9 +1,27 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Award, BookOpen, Star, Users, MapPin, Calendar, ExternalLink, Heart, Sparkles, Globe } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Award, BookOpen, Star, Users, Calendar, Heart, Sparkles, Globe, X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 import DustParticles from '../../components/animations/DustParticles';
 
 const Gurus = () => {
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+  
+  const memoryImages = [
+    '/images/Sanjana Website/20220528_172006.jpg',
+    '/images/Sanjana Website/IMG_5590.jpg',
+    '/images/Sanjana Website/IMG_5578.jpg'
+  ];
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (lightboxIndex === null) return;
+      if (e.key === 'ArrowLeft') setLightboxIndex(p => p > 0 ? p - 1 : memoryImages.length - 1);
+      else if (e.key === 'ArrowRight') setLightboxIndex(p => p < memoryImages.length - 1 ? p + 1 : 0);
+      else if (e.key === 'Escape') setLightboxIndex(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxIndex]);
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
@@ -19,11 +37,11 @@ const Gurus = () => {
     <div className="bg-black text-white overflow-hidden selection:bg-gold/30">
       
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[70vh] flex items-center justify-center pt-20">
+      <section className="relative min-h-[100vh] flex items-center justify-center pt-20">
         <div className="absolute inset-0 z-0">
           <DustParticles />
-          <div className="absolute inset-0 bg-[url('/images/photo_9.webp')] bg-cover bg-center opacity-20 grayscale" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black to-black" />
+          <div className="absolute inset-0 bg-[url('/images/Sanjana%20Website/about-us-banner.jpg')] bg-cover bg-[center_25%] opacity-90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black to-black" />
           {/* Decorative Accents */}
           <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
         </div>
@@ -249,8 +267,85 @@ const Gurus = () => {
               </div>
             </div>
           </motion.div>
+
+          <div className="mt-32 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+            {memoryImages.map((src, idx) => (
+              <motion.div 
+                key={idx} 
+                variants={fadeUp} 
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className={`relative aspect-[3/4] rounded-2xl overflow-hidden gold-border-gradient shadow-2xl group cursor-pointer ${idx === 1 ? 'md:-translate-y-12' : ''}`}
+                onClick={() => setLightboxIndex(idx)}
+              >
+                <img src={src} alt="Memory with Guru" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" />
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <div className="flex items-center gap-2 text-white/80 uppercase tracking-widest text-xs font-bold">
+                    <Maximize2 size={16} />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightboxIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/98 backdrop-blur-xl flex items-center justify-center p-4 md:p-12"
+            onClick={() => setLightboxIndex(null)}
+          >
+            <div className="absolute top-0 left-0 right-0 p-8 flex justify-center z-[110]">
+              <button 
+                className="group flex flex-col items-center gap-2 text-white/60 hover:text-white transition-all duration-300"
+                onClick={() => setLightboxIndex(null)}
+              >
+                <div className="w-12 h-12 rounded-full bg-white/5 group-hover:bg-white/10 flex items-center justify-center border border-white/10 group-hover:border-white/20 transition-all">
+                  <X size={24} />
+                </div>
+                <span className="text-[10px] uppercase tracking-[0.3em] font-bold">Close</span>
+              </button>
+            </div>
+
+            <button 
+              className="absolute left-4 md:left-12 w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-white/10 z-[110]" 
+              onClick={(e) => { e.stopPropagation(); setLightboxIndex(p => p > 0 ? p - 1 : memoryImages.length - 1); }}
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <button 
+              className="absolute right-4 md:right-12 w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-white/10 z-[110]" 
+              onClick={(e) => { e.stopPropagation(); setLightboxIndex(p => p < memoryImages.length - 1 ? p + 1 : 0); }}
+            >
+              <ChevronRight size={24} />
+            </button>
+            
+            <motion.div 
+              key={lightboxIndex}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative max-w-5xl w-full h-full flex flex-col items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img 
+                src={memoryImages[lightboxIndex]} 
+                alt="Memory with Guru" 
+                className="max-w-full max-h-[85vh] object-contain shadow-2xl rounded-sm"
+              />
+              <div className="mt-8 text-center">
+                <p className="text-white/40 text-xs tracking-[0.2em] uppercase">{lightboxIndex + 1} / {memoryImages.length}</p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   );
