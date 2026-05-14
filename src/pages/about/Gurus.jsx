@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Award, BookOpen, Star, Users, MapPin, Calendar, ExternalLink, Heart, Sparkles, Globe } from 'lucide-react';
+import DustParticles from '../../components/animations/DustParticles';
 
 const Gurus = () => {
   const fadeUp = {
@@ -20,6 +21,7 @@ const Gurus = () => {
       {/* 1. HERO SECTION */}
       <section className="relative min-h-[70vh] flex items-center justify-center pt-20">
         <div className="absolute inset-0 z-0">
+          <DustParticles />
           <div className="absolute inset-0 bg-[url('/images/photo_9.webp')] bg-cover bg-center opacity-20 grayscale" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black to-black" />
           {/* Decorative Accents */}

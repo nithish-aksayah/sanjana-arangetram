@@ -7,6 +7,7 @@ import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
+import DustParticles from '../animations/DustParticles';
 
 const GallerySection = () => {
   const [lightboxIndex, setLightboxIndex] = useState(null);
@@ -43,6 +44,7 @@ const GallerySection = () => {
   return (
     <section id="gallery" className="section-padding bg-[#050505] relative overflow-hidden">
       {/* Decorative Glow */}
+      <DustParticles />
       <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-gold/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="container-luxury relative z-10">

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { invitationData } from '../../data/content';
+import DustParticles from '../animations/DustParticles';
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center bg-black overflow-hidden pt-20 md:pt-0">
       {/* Background Decorative Glows */}
+      <DustParticles />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/10 rounded-full blur-[150px] pointer-events-none"></div>
       <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-gold/5 rounded-full blur-[120px] pointer-events-none"></div>
 
