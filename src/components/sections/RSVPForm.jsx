@@ -127,7 +127,7 @@ const RSVPForm = () => {
           >
             <div className="relative aspect-square md:aspect-[4/5] rounded-2xl overflow-hidden glass-card gold-border-gradient group max-w-lg mx-auto">
               <img
-                src="/images/Sanjana-glimpse-03.webp"
+                src="/images/photoshoot-glimpses/Sanjana-691-Edit.webp"
                 alt="Sanjana RSVP"
                 className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100"
                 loading="lazy"
