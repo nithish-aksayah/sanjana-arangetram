@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, Clock, Heart, ChevronDown, Quote, Music, BookOpen } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, EffectFade } from 'swiper/modules';
+import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const RoadToArangetram = () => {
   const [daysLeft, setDaysLeft] = useState(0);
@@ -97,11 +99,12 @@ const RoadToArangetram = () => {
               >
                 <div className="aspect-[4/3] glass-card gold-border-gradient overflow-hidden">
                   <Swiper
-                    modules={[Autoplay, EffectFade]}
+                    modules={[Autoplay, EffectFade, Pagination]}
                     effect="fade"
-                    autoplay={{ delay: 3000, disableOnInteraction: false }}
+                    autoplay={{ delay: 4000, disableOnInteraction: false }}
                     loop={true}
-                    className="w-full h-full"
+                    pagination={{ clickable: true }}
+                    className="w-full h-full luxury-swiper"
                   >
                     {[
                       'IMG_2621.jpg',
@@ -110,11 +113,13 @@ const RoadToArangetram = () => {
                       'IMG_2782.jpg'
                     ].map((img, idx) => (
                       <SwiperSlide key={idx}>
-                        <img 
-                          src={`/images/sanjana website - Road to arangetram/${img}`} 
-                          alt={`Practice ${idx + 1}`} 
-                          className="w-full h-full object-cover transition-transform duration-1000" 
-                        />
+                        <div className="relative w-full h-full overflow-hidden">
+                          <img 
+                            src={`/images/sanjana website - Road to arangetram/${img}`} 
+                            alt={`Practice ${idx + 1}`} 
+                            className="w-full h-full object-cover animate-ken-burns" 
+                          />
+                        </div>
                       </SwiperSlide>
                     ))}
                   </Swiper>
@@ -137,7 +142,31 @@ const RoadToArangetram = () => {
                 className="order-2 lg:order-1"
               >
                 <div className="aspect-square glass-card gold-border-gradient overflow-hidden">
-                  <img src="/images/sanjana website - Road to arangetram/IMG_2782.jpg" alt="Details" className="w-full h-full object-cover opacity-60" />
+                  <Swiper
+                    modules={[Autoplay, EffectFade, Pagination]}
+                    effect="fade"
+                    autoplay={{ delay: 5000, disableOnInteraction: false }}
+                    loop={true}
+                    pagination={{ clickable: true }}
+                    className="w-full h-full luxury-swiper"
+                  >
+                    {[
+                      '/images/Sanjana Website/IMG_1210.JPG',
+                      '/images/Sanjana Website/DSC_0417.JPG',
+                      '/images/Sanjana Website - My journey so far/0535_mb1040.webp',
+                      '/images/Sanjana Website - My journey so far/Copy of DSC_0283.webp'
+                    ].map((img, idx) => (
+                      <SwiperSlide key={idx}>
+                        <div className="relative w-full h-full overflow-hidden">
+                          <img 
+                            src={img} 
+                            alt={`Detail ${idx + 1}`} 
+                            className="w-full h-full object-cover animate-ken-burns" 
+                          />
+                        </div>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
                 </div>
               </motion.div>
               <motion.div 
@@ -173,21 +202,50 @@ const RoadToArangetram = () => {
                 The photoshoot became more than preparation for an event; it became a way of preserving a moment suspended between student and performer.
               </p>
             </motion.div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {['01', '02', '03', '04'].map((num, i) => (
-                <motion.div 
-                  key={i}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="aspect-[3/4] gold-border-gradient overflow-hidden group"
-                >
-                  <img src={`/images/Sanjana-glimpse-${num}.webp`} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
-                </motion.div>
-              ))}
-            </div>
+            <motion.div 
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="relative px-4 md:px-12"
+            >
+              <Swiper
+                modules={[Autoplay, Navigation, Pagination]}
+                spaceBetween={30}
+                slidesPerView={1}
+                centeredSlides={true}
+                autoplay={{ delay: 4000, disableOnInteraction: false }}
+                loop={true}
+                pagination={{ clickable: true }}
+                navigation={true}
+                breakpoints={{
+                  640: { slidesPerView: 2 },
+                  1024: { slidesPerView: 3 },
+                }}
+                className="luxury-swiper photoshoot-carousel !pb-16"
+              >
+                {[
+                  { src: '/images/photoshoot-glimpses/Sanjana-110-Edit.webp', label: '' },
+                  { src: '/images/photoshoot-glimpses/Sanjana-69-Edit-2_tz_dramatic.webp', label: '' },
+                  { src: '/images/photoshoot-glimpses/Sanjana-187-Edit.webp', label: '' },
+                  { src: '/images/photoshoot-glimpses/Sanjana-689-Edit.webp', label: '' },
+                  { src: '/images/photoshoot-glimpses/Sanjana-318-Edit.webp', label: '' }
+                ].map((item, i) => (
+                  <SwiperSlide key={i}>
+                    <div className="relative aspect-[3/4] gold-border-gradient overflow-hidden rounded-xl group bg-white/5">
+                      <img 
+                        src={item.src} 
+                        alt={item.label} 
+                        className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110" 
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
+                        <span className="text-gold uppercase tracking-[0.3em] text-[10px] font-bold">{item.label}</span>
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </motion.div>
           </div>
         </section>
 
@@ -215,7 +273,7 @@ const RoadToArangetram = () => {
                 viewport={{ once: true }}
                 className="glass-card gold-border-gradient p-4"
               >
-                <img src="/images/sanjana website - Road to arangetram/IMG_2763.jpg" alt="Invitation" className="w-full h-full object-cover shadow-2xl" />
+                <img src="/images/Invitation.webp" alt="Invitation" className="w-full h-full object-cover shadow-2xl" />
               </motion.div>
             </div>
           </div>

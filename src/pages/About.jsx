@@ -282,7 +282,7 @@ const About = () => {
                 label: 'Life Philosophy',
                 heading: 'Aut Inveniam Viam Aut Faciam',
                 body: 'I didn\'t go searching for a life philosophy; I stumbled into one during arangetram practice — somewhere between exhausted calves, relentless adavus, and late-night desperation.\nA single Latin phrase stayed with me: Aut inveniam viam aut faciam — “I shall either find a way or make one.Over time, Bharatanatyam taught me that perseverance is not about perfection. It is about continuing through exhaustion, repetition, doubt, and discipline — returning each day to grow a little further through the art.”\n',
-                image: '/images/Sanjana Website - Arageetram photoshoot glimpses/Sanjana-691-Edit.webp',
+                image: '/images/photoshoot-glimpses/Sanjana-691-Edit.webp',
                 objectPosition: "top"
               },
               {
@@ -290,7 +290,7 @@ const About = () => {
                 label: 'My Mission',
                 heading: 'Preserving Tradition Through Practice',
                 body: 'Through Bharatanatyam, I have remained deeply connected to my cultural roots while learning the value of discipline, devotion, and artistic expression. I believe traditions survive not simply because they are remembered, but because they are continuously practiced, shared, and carried forward through each generation.',
-                image: '/images/Sanjana Website - Arageetram photoshoot glimpses/Sanjana-326-Edit_evotobak_(2).webp',
+                image: '/images/photoshoot-glimpses/Sanjana-326-Edit_evotobak_(2).webp',
                 objectPosition: "top "
               },
               {
@@ -298,7 +298,7 @@ const About = () => {
                 label: 'My Passion',
                 heading: 'The Language of Movement',
                 body: 'What draws me most to Bharatanatyam is its ability to tell stories through rhythm, expression, and movement. From portraying devotion and courage to joy and longing, dance becomes a language capable of expressing emotions words often cannot.Through abhinaya, I have come to love the power of storytelling woven through classical movement and music.',
-                image: '/images/Sanjana Website - Arageetram photoshoot glimpses/Sanjana-51-Edit.webp',
+                image: '/images/photoshoot-glimpses/Sanjana-51-Edit.webp',
                 objectPosition: "top"
               },
             ].map((card, i) => (

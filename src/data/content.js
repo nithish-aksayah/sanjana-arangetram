@@ -41,6 +41,11 @@ export const invitationData = {
     subtitle: "Bharatanatyam Arangetram",
     buttonText: "RSVP Now",
     secondaryButtonText: "View Invitation",
+    sliderImages: [
+      '/images/photoshoot-glimpses/Sanjana-688-Edit.webp',
+      '/images/photoshoot-glimpses/Sanjana-475.webp',
+      '/images/photoshoot-glimpses/Sanjana-691-Edit.webp'
+    ]
   },
 
   about: {

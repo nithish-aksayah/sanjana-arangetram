@@ -26,7 +26,7 @@ const Hero = () => {
   const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
 
   return (
-    <section className="relative min-h-screen flex items-center bg-black overflow-hidden pt-20 md:pt-0">
+    <section className="relative min-h-[90vh] lg:min-h-screen flex items-center bg-black overflow-hidden pt-24 lg:pt-0">
       {/* Background Decorative Glows */}
       <DustParticles />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/10 rounded-full blur-[150px] pointer-events-none"></div>
@@ -40,13 +40,13 @@ const Hero = () => {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="w-full lg:w-1/2 text-center lg:text-left order-2 lg:order-1"
+            className="w-full lg:w-1/2 text-center lg:text-left order-2 lg:order-1 lg:pr-10"
           >
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="font-cursive text-2xl md:text-3xl lg:text-4xl text-gold mb-4"
+              className="font-cursive text-2xl md:text-3xl lg:text-4xl text-gold mb-2 md:mb-4"
             >
               {invitationData.event.title} of
             </motion.p>
@@ -55,7 +55,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-6xl md:text-8xl lg:text-8xl font-serif font-bold text-white mb-6 tracking-tight leading-none"
+              className="text-6xl md:text-8xl lg:text-9xl font-serif font-bold text-white mb-8 tracking-tight leading-[0.9]"
             >
               {invitationData.event.dancerName}
             </motion.h1>
@@ -109,11 +109,11 @@ const Hero = () => {
                   key={currentIndex}
                   src={images[currentIndex]}
                   alt={invitationData.event.dancerName}
-                  initial={{ opacity: 0 }} 
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="w-full h-full object-contain md:object-cover lg:object-contain relative z-10 drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
+                  initial={{ opacity: 0, scale: 1.05 }} 
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 1, ease: [0.4, 0, 0.2, 1] }}
+                  className="w-full h-full object-cover relative z-10 drop-shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
                   loading={currentIndex === 0 ? "eager" : "lazy"}
                   decoding="sync"
                 />
