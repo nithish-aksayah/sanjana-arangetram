@@ -26,7 +26,7 @@ const timeline = [
     year: '2012',
     title: 'The Beginning',
     description: 'Sanjana’s journey at Kruti Dance Academy began with Bollywood dance classes, where movement first became a source of joy, rhythm, and confidence.',
-    image: '/images/Sanjana Website - My journey so far/Navin_7509312.webp',
+    image: '/images/Sanjana Website - My journey so far/DSC_0215.webp',
     side: 'left',
     objectPosition: 'center 20%'
   },
@@ -90,7 +90,7 @@ const timeline = [
     year: '2026',
     title: 'Arangetram — The Debut',
     description: 'After years of devotion, discipline, and guidance from her gurus, Sanjana presents her arangetram debut performance on July 25, 2026, at Gas South Theater.',
-    image: '/images/photo_8.webp',
+    image: '/images/photo_9.webp',
     side: 'left',
     objectPosition: 'center 10%',
   },

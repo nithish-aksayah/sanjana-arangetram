@@ -166,10 +166,10 @@ const SanjanaDiddige = () => {
                   <div className="w-12 h-px bg-gold mb-10" />
                   <div className="aspect-square rounded-2xl overflow-hidden gold-border-gradient">
                     <img 
-                      src="/images/photoshoot-glimpses/Sanjana-326-Edit_evotobak_(2).webp" 
+                      src="/images/photoshoot-glimpses/Sanjana-358-Edit.webp" 
                       alt="Sanjana Diddige - Journey of the Soul" 
-                      className="w-full h-full object-cover"
-                       loading="lazy"
+                      className="w-full h-full object-cover object-top"
+                      loading="lazy"
                     />
                   </div>
                 </div>
