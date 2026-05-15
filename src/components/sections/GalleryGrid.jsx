@@ -11,14 +11,7 @@ import DustParticles from '../animations/DustParticles';
 
 const GallerySection = () => {
   const [lightboxIndex, setLightboxIndex] = useState(null);
-  const [activeTab, setActiveTab] = useState('performance');
-
-  const categories = [
-    { id: 'performance', name: 'Performance Glimpses' },
-    { id: 'awards', name: 'Awards & Achievements' }
-  ];
-
-  const currentGallery = invitationData.gallery[activeTab] || [];
+  const currentGallery = invitationData.gallery.photoshoot || [];
 
   const handleKeyDown = useCallback((e) => {
     if (lightboxIndex === null) return;
@@ -54,29 +47,11 @@ const GallerySection = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-cursive"
+            className="font-serif text-5xl md:text-6xl text-white mb-4"
           >
-            Gallery
+            Arangetram <span className="text-gold">Photoshoot Glimpses</span>
           </motion.h2>
-          <div className="section-title-divider mb-8"></div>
-          
-          {/* Tabs */}
-          <div className="flex justify-center space-x-8 border-b border-white/5 pb-4 max-w-xl mx-auto">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveTab(cat.id)}
-                className={`text-xs uppercase tracking-[0.2em] font-bold transition-all duration-300 relative ${
-                  activeTab === cat.id ? 'text-gold' : 'text-gray-500 hover:text-white'
-                }`}
-              >
-                {cat.name}
-                {activeTab === cat.id && (
-                  <motion.div layoutId="activeTab" className="absolute -bottom-[17px] left-0 right-0 h-[2px] bg-gold" />
-                )}
-              </button>
-            ))}
-          </div>
+          <div className="section-title-divider mb-12"></div>
         </div>
 
 
