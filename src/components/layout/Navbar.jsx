@@ -192,15 +192,26 @@ const Navbar = () => {
                 <div key={link.name} className="w-full text-center">
                   {link.submenu ? (
                     <div className="flex flex-col items-center">
-                      <button 
-                        onClick={() => setMobileSubmenuOpen(mobileSubmenuOpen === link.name ? null : link.name)}
-                        className={`text-2xl font-serif italic transition-colors flex items-center gap-3 ${
-                          isActive(link.path) ? 'text-gold' : 'text-white hover:text-gold'
-                        }`}
-                      >
-                        {link.name}
-                        <ChevronDown size={20} className={`text-gold/40 transition-transform duration-300 ${mobileSubmenuOpen === link.name ? 'rotate-180' : ''}`} />
-                      </button>
+                      <div className="flex items-center gap-3">
+                        <Link 
+                          to={link.path}
+                          onClick={handleNavLinkClick}
+                          className={`text-2xl font-serif italic transition-colors ${
+                            isActive(link.path) ? 'text-gold' : 'text-white hover:text-gold'
+                          }`}
+                        >
+                          {link.name}
+                        </Link>
+                        <button 
+                          onClick={() => setMobileSubmenuOpen(mobileSubmenuOpen === link.name ? null : link.name)}
+                          className="p-2"
+                        >
+                          <ChevronDown 
+                            size={20} 
+                            className={`text-gold/40 transition-transform duration-300 ${mobileSubmenuOpen === link.name ? 'rotate-180' : ''}`} 
+                          />
+                        </button>
+                      </div>
                       
                       <AnimatePresence>
                         {mobileSubmenuOpen === link.name && (
@@ -210,13 +221,6 @@ const Navbar = () => {
                             exit={{ height: 0, opacity: 0 }}
                             className="overflow-hidden flex flex-col items-center space-y-4 mt-6"
                           >
-                            <Link
-                              to={link.path}
-                              onClick={handleNavLinkClick}
-                              className="text-white/50 text-lg font-serif italic hover:text-gold transition-colors"
-                            >
-                              General Overview
-                            </Link>
                             {link.submenu.map((subItem) => (
                               <Link
                                 key={subItem.path}

@@ -408,7 +408,8 @@ const About = () => {
         </div>
       </section>
 
-      {/* ── JOURNEY HIGHLIGHTS ── */}
+      {/* ── JOURNEY HIGHLIGHTS (Commented out) ── */}
+      {/* 
       <section className="section-padding bg-black">
         <div className="container-luxury">
           <motion.div {...fadeUp} className="text-center mb-16">
@@ -445,7 +446,6 @@ const About = () => {
             ))}
           </div>
 
-          {/* Extra awards slider */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -494,7 +494,6 @@ const About = () => {
               ))}
             </Swiper>
 
-            {/* Custom Navigation Buttons */}
             <button className="awards-prev absolute top-1/2 -left-4 md:-left-12 -translate-y-1/2 z-10 w-10 h-10 md:w-14 h-14 rounded-full bg-black/50 backdrop-blur-md border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all duration-300 opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0">
               <ChevronLeft size={24} />
             </button>
@@ -504,6 +503,7 @@ const About = () => {
           </motion.div>
         </div>
       </section>
+      */}
 
       {/* ── CLOSING QUOTE ── */}
       <section className="py-24 bg-[#0A0505] relative overflow-hidden">
