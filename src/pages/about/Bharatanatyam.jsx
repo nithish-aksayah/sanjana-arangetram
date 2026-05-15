@@ -191,7 +191,7 @@ const Bharatanatyam = () => {
                 title: 'Natya',
                 subtitle: 'Dramatic Interpretation',
                 desc: 'The theatrical aspect of Bharatanatyam, where dancers embody characters and narratives through expressive interpretation and stylized movement.',
-                image: '/images/Sanjana-glimpse-03.webp'
+                image: '/images/Sanjana-glimpse-05.webp'
               }
             ].map((item, idx) => (
               <motion.div 
