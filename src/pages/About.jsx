@@ -1,21 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay, FreeMode } from 'swiper/modules';
-import { ChevronLeft, ChevronRight, X, Maximize2 } from 'lucide-react';
 import DustParticles from '../components/animations/DustParticles';
 
-// Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/free-mode';
-
 const fadeUp = {
-  initial: { opacity: 0, y: 15 }, 
+  initial: { opacity: 0, y: 15 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-30px" }, 
-  transition: { 
+  viewport: { once: true, margin: "-30px" },
+  transition: {
     duration: typeof window !== 'undefined' && window.innerWidth < 768 ? 0.3 : 0.5,
     ease: "easeOut"
   },
@@ -188,147 +179,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* ── PHILOSOPHY / MISSION / PASSION ── */}
-      <section className="section-padding bg-black">
-        <div className="container-luxury">
-          <motion.div {...fadeUp} className="text-center mb-16">
-            <p className="text-[11px] uppercase tracking-[0.5em] text-[#D4AF37] font-bold mb-4">Her Story</p>
-            <h2 className="font-serif text-5xl md:text-6xl text-white mb-6">Philosophy, Mission & Passion</h2>
-            <div className="section-title-divider" />
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: '✦',
-                label: 'Life Philosophy',
-                heading: 'Aut Inveniam Viam Aut Faciam',
-                body: 'I didn\'t go searching for a life philosophy; I stumbled into one during arangetram practice — somewhere between exhausted calves, relentless adavus, and late-night desperation.\nA single Latin phrase stayed with me: Aut inveniam viam aut faciam — “I shall either find a way or make one.Over time, Bharatanatyam taught me that perseverance is not about perfection. It is about continuing through exhaustion, repetition, doubt, and discipline — returning each day to grow a little further through the art.”\n',
-                image: '/images/photoshoot-glimpses/Sanjana-691-Edit.webp',
-                objectPosition: "top"
-              },
-              {
-                icon: '❋',
-                label: 'My Mission',
-                heading: 'Preserving Tradition Through Practice',
-                body: 'Through Bharatanatyam, I have remained deeply connected to my cultural roots while learning the value of discipline, devotion, and artistic expression. I believe traditions survive not simply because they are remembered, but because they are continuously practiced, shared, and carried forward through each generation.',
-                image: '/images/photoshoot-glimpses/Sanjana-326-Edit_evotobak_(2).webp',
-                objectPosition: "top "
-              },
-              {
-                icon: '◈',
-                label: 'My Passion',
-                heading: 'The Language of Movement',
-                body: 'What draws me most to Bharatanatyam is its ability to tell stories through rhythm, expression, and movement. From portraying devotion and courage to joy and longing, dance becomes a language capable of expressing emotions words often cannot.Through abhinaya, I have come to love the power of storytelling woven through classical movement and music.',
-                image: '/images/photoshoot-glimpses/Sanjana-51-Edit.webp',
-                objectPosition: "top"
-              },
-            ].map((card, i) => (
-              <motion.div
-                key={card.label}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: i * 0.15 }}
-                className="glass-card gold-border-gradient overflow-hidden group"
-              >
-                <div className="h-[320px] overflow-hidden">
-                  <img
-                    src={card.image}
-                    alt={card.heading}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    style={{ objectPosition: card.objectPosition || 'center 45%' }}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div className="p-8">
-                  <p className="text-[#D4AF37] text-lg mb-2">{card.icon}</p>
-                  <p className="text-[10px] uppercase tracking-[0.4em] text-[#D4AF37] font-bold mb-3">{card.label}</p>
-                  <h3 className="font-serif text-2xl text-white mb-4">{card.heading}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed whitespace-pre-line">
-                    {expandedIndex === i ? card.body : `${card.body.slice(0, 160)}...`}
-                  </p>
-                  {card.body.length > 160 && (
-                    <button 
-                      onClick={() => setExpandedIndex(expandedIndex === i ? null : i)}
-                      className="mt-4 text-[#D4AF37] text-[10px] uppercase tracking-[0.2em] font-bold hover:text-white transition-colors"
-                    >
-                      {expandedIndex === i ? 'Read Less' : 'Read More'}
-                    </button>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── TIMELINE ── */}
-      <section className="section-padding bg-[#0A0505]">
-        <div className="container-luxury">
-          <motion.div {...fadeUp} className="text-center mb-20">
-            <p className="text-[11px] uppercase tracking-[0.5em] text-[#D4AF37] font-bold mb-4">A Dancer's Path</p>
-            <h2 className="font-serif text-5xl md:text-6xl text-white mb-6">My Journey So Far</h2>
-            <div className="section-title-divider" />
-          </motion.div>
-
-          <div className="relative" ref={timelineRef}>
-            {/* Centre line background (faint) */}
-            <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-white/5" />
-            
-            {/* Animated Centre line — grows on scroll */}
-            <motion.div 
-              style={{ scaleY }}
-              className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-[#D4AF37]/60 origin-top shadow-[0_0_15px_rgba(212,175,55,0.3)]" 
-            />
-
-            <div className="flex flex-col gap-16">
-              {timeline.map((item, i) => (
-                <motion.div
-                  key={item.year}
-                  initial={{ opacity: 0, x: item.side === 'left' ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.1 }}
-                  className={`relative flex flex-col md:flex-row items-center gap-8 ${
-                    item.side === 'right' ? 'md:flex-row-reverse' : ''
-                  }`}
-                >
-                  {/* Card */}
-                  <div className="w-full md:w-[45%]">
-                    <div className="glass-card gold-border-gradient overflow-hidden group">
-                      <div className="h-[320px] overflow-hidden">
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                          style={{ objectPosition: item.objectPosition || 'top' }}
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </div>
-                      <div className="p-7">
-                        <p className="text-[11px] uppercase tracking-[0.4em] text-[#D4AF37] font-bold mb-2">{item.year}</p>
-                        <h3 className="font-serif text-2xl text-white mb-3">{item.title}</h3>
-                        <p className="text-gray-400 text-sm leading-relaxed">{item.description}</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Centre dot */}
-                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-black border-2 border-[#D4AF37] items-center justify-center z-10 gold-glow">
-                    <span className="text-[#D4AF37] font-serif font-bold text-xs">{item.year.slice(2)}</span>
-                  </div>
-
-                  {/* Spacer opposite side */}
-                  <div className="hidden md:block w-[45%]" />
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+    
 
     </div>
   );
