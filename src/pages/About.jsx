@@ -96,10 +96,7 @@ const timeline = [
   },
 ];
 
-];
-
 const About = () => {
-  const [lightboxIndex, setLightboxIndex] = useState(null);
   const [expandedIndex, setExpandedIndex] = useState(null);
   const timelineRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -108,10 +105,6 @@ const About = () => {
   });
 
   const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
-
-  const prevImg = (e) => { 
-    e.stopPropagation(); 
-  };
 
   return (
     <div className="bg-black min-h-screen overflow-x-hidden">
