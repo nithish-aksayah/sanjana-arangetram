@@ -166,9 +166,10 @@ const SanjanaDiddige = () => {
                   <div className="w-12 h-px bg-gold mb-10" />
                   <div className="aspect-square rounded-2xl overflow-hidden gold-border-gradient">
                     <img 
-                      src="/images/Sanjana-glimpse-02.webp" 
-                      alt="The Journey" 
-                      className="w-full h-full object-cover grayscale opacity-60"
+                      src="/images/photoshoot-glimpses/Sanjana-326-Edit_evotobak_(2).webp" 
+                      alt="Sanjana Diddige - Journey of the Soul" 
+                      className="w-full h-full object-cover"
+                       loading="lazy"
                     />
                   </div>
                 </div>
@@ -262,8 +263,33 @@ const SanjanaDiddige = () => {
         </div>
       </section>
 
-  
-  {/* 6. RECOGNITION & ACHIEVEMENTS */}
+      {/* 4. ARANGETRAM MILESTONE SECTION */}
+      <section className="py-32 relative overflow-hidden bg-[#050505]">
+        <div className="absolute inset-0 bg-[url('/images/photo_9.webp')] bg-cover opacity-10 grayscale" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-transparent" />
+        
+        <div className="container-luxury relative z-10 text-center">
+          <motion.div 
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto py-20 px-10 glass-card gold-border-gradient bg-black/40 backdrop-blur-xl"
+          >
+            <h2 className="text-4xl md:text-7xl font-serif italic mb-10 leading-tight">
+              A Celebration of <br/> <span className="text-gold">Tradition</span>
+            </h2>
+            <p className="text-xl md:text-2xl font-serif text-gray-300 italic mb-12 leading-relaxed">
+              "This debut symbolizes the transformation of a student into an artist, carrying forward a timeless tradition through grace and dedication."
+            </p>
+            <div className="flex justify-center gap-2">
+              {[1, 2, 3].map(i => <div key={i} className="w-1.5 h-1.5 rounded-full bg-gold/50" />)}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 5. RECOGNITION & ACHIEVEMENTS */}
       <section className="section-padding bg-black relative z-10">
         <div className="container-luxury">
           <motion.div 
@@ -364,6 +390,24 @@ const SanjanaDiddige = () => {
         </div>
       </section>
 
+      {/* 6. CLOSING QUOTE */}
+      <section className="py-40 relative">
+        <div className="container-luxury text-center">
+          <motion.div 
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <Quote className="text-gold/10 absolute -top-12 left-1/2 -translate-x-1/2 scale-[3]" />
+            <h2 className="text-4xl md:text-6xl font-serif italic text-white/90 max-w-4xl mx-auto leading-relaxed z-10 relative">
+              “Through dance, <span className="text-gold underline decoration-gold/20 underline-offset-8">tradition becomes timeless</span>.”
+            </h2>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ── LIGHTBOX ── */}
       <AnimatePresence>
         {lightboxIndex !== null && (
@@ -414,32 +458,6 @@ const SanjanaDiddige = () => {
           </motion.div>
         )}
       </AnimatePresence>
-
-        {/* 4. ARANGETRAM MILESTONE SECTION */}
-      <section className="py-32 relative overflow-hidden bg-[#050505]">
-        <div className="absolute inset-0 bg-[url('/images/photo_9.webp')] bg-cover opacity-10 grayscale" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-transparent" />
-        
-        <div className="container-luxury relative z-10 text-center">
-          <motion.div 
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="max-w-4xl mx-auto py-20 px-10 glass-card gold-border-gradient bg-black/40 backdrop-blur-xl"
-          >
-            <h2 className="text-4xl md:text-7xl font-serif italic mb-10 leading-tight">
-              A Celebration of <br/> <span className="text-gold">Tradition</span>
-            </h2>
-            <p className="text-xl md:text-2xl font-serif text-gray-300 italic mb-12 leading-relaxed">
-              "This debut symbolizes the transformation of a student into an artist, carrying forward a timeless tradition through grace and dedication."
-            </p>
-            <div className="flex justify-center gap-2">
-              {[1, 2, 3].map(i => <div key={i} className="w-1.5 h-1.5 rounded-full bg-gold/50" />)}
-            </div>
-          </motion.div>
-        </div>
-      </section>
     </div>
   );
 };
