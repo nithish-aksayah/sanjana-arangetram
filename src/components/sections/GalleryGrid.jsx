@@ -13,6 +13,12 @@ const GallerySection = () => {
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const currentGallery = invitationData.gallery.photoshoot || [];
 
+  const [visibleCount, setVisibleCount] = useState(12);
+  const imagesToShow = currentGallery.slice(0, visibleCount);
+  const hasMore = visibleCount < currentGallery.length;
+
+  const showMore = () => setVisibleCount((prev) => prev + 12);
+
   const handleKeyDown = useCallback((e) => {
     if (lightboxIndex === null) return;
     if (e.key === 'ArrowLeft') {
@@ -58,7 +64,7 @@ const GallerySection = () => {
         {/* Masonry Layout */}
         <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
           <AnimatePresence mode="popLayout">
-            {currentGallery.map((item, index) => (
+            {imagesToShow.map((item, index) => (
               <motion.div
                 key={item.url}
                 layout
@@ -87,6 +93,22 @@ const GallerySection = () => {
             ))}
           </AnimatePresence>
         </div>
+
+        {/* Show More Button */}
+        {hasMore && (
+          <div className="flex justify-center mt-12 pb-12">
+            <motion.button 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={showMore}
+              className="btn-outline-premium"
+            >
+              Show More Glimpses
+            </motion.button>
+          </div>
+        )}
 
         {/* Lightbox */}
         <AnimatePresence>

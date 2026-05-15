@@ -27,66 +27,29 @@ const InvitationCard = () => {
           <div className="section-title-divider"></div>
         </div>
 
-        <div className="flex flex-col lg:flex-row items-stretch gap-0 rounded-2xl overflow-hidden glass-card gold-border-gradient">
+        <div className="max-w-3xl mx-auto rounded-2xl overflow-hidden glass-card gold-border-gradient">
           
-          {/* Left: Invitation Image */}
+          {/* Centered Invitation Image */}
           <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="w-full lg:w-1/2 aspect-[4/5] bg-black/40 flex items-center justify-center overflow-hidden"
+            className="w-full aspect-auto flex items-center justify-center bg-black/40 relative group"
           >
             <img 
               src="/images/Invitation.webp" 
               alt="Invitation Details" 
-              className="w-full h-full object-contain"
+              className="w-full h-auto object-contain"
               loading="lazy"
             />
-          </motion.div>
-
-          {/* Right: Swiper Image Gallery */}
-          <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="w-full lg:w-1/2 aspect-[4/5] relative group overflow-hidden"
-          >
-            <Swiper
-              modules={[Autoplay, EffectFade]}
-              effect="fade"
-              fadeEffect={{ crossFade: true }}
-              speed={2000}
-              loop={true}
-              autoplay={{
-                delay: 4000,
-                disableOnInteraction: false,
-              }}
-              className="w-full h-full"
-            >
-              {invitationData.gallery?.performance?.map((img, idx) => (
-                <SwiperSlide key={idx} className="h-full">
-                  <div className="w-full h-full relative overflow-hidden">
-                    <img 
-                      src={img.url} 
-                      alt={`Performance ${idx + 1}`}
-                      className="w-full h-full object-cover transition-transform duration-[10s] group-hover:scale-110"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent"></div>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
             
-            {/* Corner Accents */}
-            <div className="absolute top-8 right-8 w-12 h-12 border-t border-r border-gold/40 z-20"></div>
-            <div className="absolute bottom-8 left-8 w-12 h-12 border-b border-l border-gold/40 z-20"></div>
+            {/* Elegant Corner Accents */}
+            <div className="absolute top-8 left-8 w-12 h-12 border-t border-l border-gold/40 pointer-events-none"></div>
+            <div className="absolute top-8 right-8 w-12 h-12 border-t border-r border-gold/40 pointer-events-none"></div>
+            <div className="absolute bottom-8 left-8 w-12 h-12 border-b border-l border-gold/40 pointer-events-none"></div>
+            <div className="absolute bottom-8 right-8 w-12 h-12 border-b border-r border-gold/40 pointer-events-none"></div>
           </motion.div>
-
         </div>
       </div>
     </section>

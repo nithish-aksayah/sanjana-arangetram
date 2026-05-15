@@ -79,7 +79,7 @@ export const invitationData = {
     academyName: "Kruti Dance Academy",
   },
   contact: {
-    email: "info@sanjanadiddige.com",
+    email: "sanjanadiddige.arangetram@gmail.com",
     phone: "+1-571-276-7933",
   },
   gallery: {
