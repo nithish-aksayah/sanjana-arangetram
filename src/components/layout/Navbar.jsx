@@ -39,7 +39,7 @@ const Navbar = () => {
     { name: 'Home', path: '/' },
     { 
       name: 'About', 
-      path: '/about',
+      path: '/about/sanjana-diddige',
       submenu: [
         { name: 'Bharatanatyam', path: '/about/bharatanatyam' },
         { name: 'Our Gurus', path: '/about/gurus' },

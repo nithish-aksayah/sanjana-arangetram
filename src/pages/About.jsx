@@ -179,8 +179,6 @@ const About = () => {
         </div>
       </section>
 
-    
-
     </div>
   );
 };

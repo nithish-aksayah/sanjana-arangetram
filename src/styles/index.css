@@ -20,7 +20,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Premium Layout System */
 .section-padding {
-  @apply py-16 lg:py-24;
+  @apply py-14 lg:py-18;
 }
 
 .container-luxury {

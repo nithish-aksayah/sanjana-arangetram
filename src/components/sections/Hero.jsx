@@ -5,17 +5,6 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { invitationData } from '../../data/content';
 import DustParticles from '../animations/DustParticles';
 
-// Preload all hero images so the browser fetches them before they appear
-const preloadImages = (urls) => {
-  urls.forEach((url) => {
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'image';
-    link.href = url;
-    document.head.appendChild(link);
-  });
-};
-
 const Hero = memo(() => {
   const navigate = useNavigate();
   const images = invitationData.hero.sliderImages || [
@@ -25,11 +14,13 @@ const Hero = memo(() => {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
 
-  // Preload all images once on mount — browser caches them immediately
+  // Delay rendering/fetching slides 2 and 3 until after initial page load is fully complete
   useEffect(() => {
-    preloadImages(images);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    const timer = setTimeout(() => setIsMounted(true), 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -127,23 +118,27 @@ const Hero = memo(() => {
                 forcing the browser to re-fetch even cached images.
                 Now every image is always mounted; only opacity/z-index changes.
               */}
-              {images.map((src, idx) => (
-                <motion.img
-                  key={src}
-                  src={src}
-                  alt={invitationData.event.dancerName}
-                  animate={{
-                    opacity: idx === currentIndex ? 1 : 0,
-                    scale: idx === currentIndex ? 1 : 1.05,
-                    zIndex: idx === currentIndex ? 10 : 5,
-                  }}
-                  transition={{ duration: 1, ease: [0.4, 0, 0.2, 1] }}
-                  className="absolute inset-0 w-full h-full object-cover drop-shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
-                  loading={idx === 0 ? 'eager' : 'lazy'}
-                  fetchpriority={idx === 0 ? 'high' : 'low'}
-                  decoding="async"
-                />
-              ))}
+              {images.map((src, idx) => {
+                // Only render the first LCP image initially. Render slides 2 and 3 after page load is complete.
+                if (idx > 0 && !isMounted) return null;
+                return (
+                  <motion.img
+                    key={src}
+                    src={src}
+                    alt={invitationData.event.dancerName}
+                    animate={{
+                      opacity: idx === currentIndex ? 1 : 0,
+                      scale: idx === currentIndex ? 1 : 1.05,
+                      zIndex: idx === currentIndex ? 10 : 5,
+                    }}
+                    transition={{ duration: 1, ease: [0.4, 0, 0.2, 1] }}
+                    className="absolute inset-0 w-full h-full object-cover drop-shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+                    loading={idx === 0 ? 'eager' : 'lazy'}
+                    fetchpriority={idx === 0 ? 'high' : 'low'}
+                    decoding="async"
+                  />
+                );
+              })}
 
               {/* Slider Controls */}
               <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-6 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-500">

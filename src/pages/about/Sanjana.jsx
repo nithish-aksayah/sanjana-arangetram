@@ -180,60 +180,99 @@ const SanjanaDiddige = () => {
   return (
     <div className="bg-black text-white overflow-x-hidden selection:bg-gold/30">
       
-      {/* 1. HERO SECTION */}
-      <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 z-0">
+      {/* 1. HERO BANNER — cinematic full-width, matches About page style */}
+      <section className="relative min-h-[60vh] flex items-end pb-16 pt-32 overflow-hidden">
+        <div className="absolute inset-0">
           <DustParticles />
-          <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-gold/5 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-maroon/5 rounded-full blur-[100px] animate-pulse delay-700" />
+          <img
+            src="/images/sanjana-about.webp"
+            alt="Sanjana Diddige in classical pose"
+            className="w-full h-full object-cover"
+            style={{ objectPosition: 'center 20%' }}
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30" />
         </div>
-
-        <div className="container-luxury grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
-          
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="order-2 lg:order-1"
+        
+        <div className="container-luxury relative z-10">
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="text-[11px] uppercase tracking-[0.5em] text-[#D4AF37] font-bold mb-4"
           >
-            <div className="inline-block px-4 py-1 border border-gold/20 rounded-full text-gold text-[10px] uppercase tracking-widest bg-gold/5 mb-8">
-              Fourteen Years of Devotion
-            </div>
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-serif leading-tight mb-6">
-              <span className="block text-white opacity-90 italic">Sanjana</span>
-              <span className="block text-gold/80 -mt-2 md:-mt-4">Diddige</span>
-            </h1>
-            <p className="text-xl md:text-2xl font-serif text-white/60 italic max-w-xl leading-relaxed mb-10">
-              A journey shaped by discipline, perseverance, and a deep love for the classical arts.
-            </p>
-            <div className="w-20 h-px bg-gold/50" />
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            className="order-1 lg:order-2 relative"
+            Fourteen Years of Devotion
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="font-serif text-6xl md:text-8xl lg:text-9xl text-white leading-none mb-5"
           >
-            <div className="relative z-10 aspect-[3/4] rounded-sm overflow-hidden gold-border-gradient shadow-[0_0_50px_rgba(212,175,55,0.15)]">
-              <img 
-                src="/images/sanjana-about.webp" 
-                alt="Sanjana Diddige" 
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
-              />
-            </div>
-            <div className="absolute -bottom-6 -left-6 w-32 h-32 border border-gold/10 rounded-full animate-spin-slow opacity-30" />
-          </motion.div>
+            Sanjana <span className="text-[#D4AF37]">Diddige</span>
+          </motion.h1>
+          <div className="w-24 h-px bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent" />
+        </div>
+      </section>
 
+      {/* ── INTRO BIO ── */}
+      <section className="section-padding bg-[#0A0505]">
+        <div className="container-luxury">
+          <div className="flex flex-col lg:flex-row gap-16 items-center">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="lg:w-1/2"
+            >
+              <p className="text-[11px] uppercase tracking-[0.5em] text-[#D4AF37] font-bold mb-5">About Me</p>
+              <h2 className="font-serif text-4xl md:text-5xl text-white mb-8 leading-tight">
+                Fourteen Years of Devotion to Classical Dance
+              </h2>
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                Sanjana Diddige has passionately pursued the classical art form of Bharatanatyam under the
+                guidance of esteemed Guru Mrs. Dina Sheth and Mrs. Shemoni Parekh at Kruti Dance Academy. Her Arangetram marks a
+                significant milestone in her artistic journey, reflecting years of dedication, discipline,
+                and devotion to Indian classical dance.
+              </p>
+              <p className="text-gray-400 text-base leading-relaxed">
+                Through rigorous training, countless performances, and an unwavering love for the art, Sanjana
+                has developed not just technical mastery but a deep spiritual connection to Bharatanatyam —
+                the sacred language of movement, rhythm, and expression.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1 }}
+              className="lg:w-1/2 relative"
+            >
+              <div className="absolute top-6 left-6 -right-6 -bottom-6 bg-[#D4AF37]/15 rounded-2xl" />
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl max-w-md mx-auto">
+                <div className="absolute -top-4 -left-4 w-12 h-12 border-t-2 border-l-2 border-[#D4AF37] z-10" />
+                <img
+                  src="/images/photo_10.webp"
+                  alt="Sanjana Diddige performing Bharatanatyam"
+                  className="w-full aspect-[4/5] object-cover object-top hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* 2. JOURNEY STORY SECTION */}
-      <section className="section-padding bg-[#050505]">
+      <section className="py-12 lg:py-16 bg-[#050505]">
         <div className="container-luxury">
           <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
               
               <motion.div 
                 variants={fadeUp}
@@ -243,9 +282,9 @@ const SanjanaDiddige = () => {
                 className="lg:col-span-5"
               >
                 <div className="sticky top-32">
-                  <h2 className="text-4xl md:text-5xl font-serif italic mb-8">A Journey <br/> <span className="text-gold">of the Soul</span></h2>
-                  <div className="w-12 h-px bg-gold mb-10" />
-                  <div className="aspect-square rounded-2xl overflow-hidden gold-border-gradient">
+                  <h2 className="text-4xl md:text-5xl font-serif italic mb-4">A Journey <br/> <span className="text-gold">of the Soul</span></h2>
+                  <div className="w-12 h-px bg-gold mb-6" />
+                  <div className="aspect-[4/3] rounded-2xl overflow-hidden gold-border-gradient">
                     <img 
                       src="/images/photoshoot-glimpses/Sanjana-358-Edit.webp" 
                       alt="Sanjana Diddige - Journey of the Soul" 
@@ -261,31 +300,18 @@ const SanjanaDiddige = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="lg:col-span-7 space-y-12"
+                className="lg:col-span-7 space-y-4"
               >
-                <div className="space-y-8 text-gray-300 font-serif text-lg leading-relaxed italic">
-                  <p className="first-letter:text-5xl first-letter:text-gold first-letter:font-serif first-letter:mr-3 first-letter:float-left">
-                    For over fourteen years, Bharatanatyam has been an integral part of Sanjana Diddige’s life. Under the guidance of esteemed Guru Mrs. Dina Sheth and Mrs. Shemoni Parekh at Kruti Dance Academy, what began as childhood curiosity slowly grew into a journey shaped by discipline, perseverance, and devotion to the classical arts.
+                <div className="space-y-4">
+                  <p className="text-gray-300 text-lg leading-relaxed mb-3">
+                    For over fourteen years, Bharatanatyam has been an integral part of Sanjana Diddige's life. Under the guidance of esteemed Guru Mrs. Dina Sheth and Mrs. Shemoni Parekh at Kruti Dance Academy, what began as childhood curiosity slowly grew into a journey shaped by discipline, perseverance, and devotion to the classical arts.
                   </p>
-                  <p>
+                  <p className="text-gray-300 text-lg leading-relaxed mb-3">
                     Through years of training, rehearsals, and performances, Bharatanatyam became more than dance. It became a source of confidence, expression, and personal growth — teaching patience through repetition, resilience through challenge, and the power of storytelling through movement and music.
                   </p>
-                  <p>
+                  <p className="text-gray-400 text-base leading-relaxed">
                     Her Arangetram marks the culmination of this journey so far: a celebration of tradition, artistry, and the years of dedication that transformed a young student into a performer prepared to step onto the stage.
                   </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-12 border-t border-white/5">
-                  <div className="p-8 glass-card border-none bg-white/[0.02]">
-                    <Star className="text-gold mb-4" size={24} />
-                    <h4 className="text-white font-serif text-xl mb-2 italic">14+ Years</h4>
-                    <p className="text-gray-400 text-sm italic font-serif">A childhood curiosity matured into a lifelong passion.</p>
-                  </div>
-                  <div className="p-8 glass-card border-none bg-white/[0.02]">
-                    <BookOpen className="text-gold mb-4" size={24} />
-                    <h4 className="text-white font-serif text-xl mb-2 italic">Kruti Academy</h4>
-                    <p className="text-gray-400 text-sm italic font-serif">Nurtured under the guidance of world-class Gurus.</p>
-                  </div>
                 </div>
               </motion.div>
 
@@ -295,35 +321,41 @@ const SanjanaDiddige = () => {
       </section>
 
       {/* 3. VALUES / GROWTH SECTION */}
-      <section className="section-padding">
-        <div className="container-luxury text-center">
+      <section className="py-12 lg:py-16">
+        <div className="container-luxury">
           <motion.div 
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="mb-20"
+            className="mb-10"
           >
-            <h2 className="text-4xl md:text-5xl font-serif italic mb-8">What Dance Has <span className="text-gold">Taught Me</span></h2>
-            <div className="w-12 h-px bg-gold mx-auto" />
+            <h2 className="font-serif text-4xl md:text-5xl text-white mb-4 leading-tight">What Dance Has <span className="text-[#D4AF37]">Taught Me</span></h2>
+            <div className="w-12 h-px bg-[#D4AF37]" />
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="flex flex-col gap-6">
             {[
               { 
                 title: 'Resilience', 
-                icon: <Shield className="text-gold" size={32} />,
-                desc: 'Finding strength through every challenge and repetition in the dance studio.'
+                icon: <Shield className="text-gold" size={20} />,
+                desc: 'Finding strength through every challenge and repetition in the dance studio. Each practice session built not just technique, but an enduring mental fortitude that carries beyond the stage.',
+                image: '/images/photoshoot-glimpses/Sanjana-691-Edit.webp',
+                objectPosition: 'center 25%',
               },
               { 
                 title: 'Expression', 
-                icon: <Sparkles className="text-gold" size={32} />,
-                desc: 'Unlocking the power of storytelling through the language of movement and music.'
+                icon: <Sparkles className="text-gold" size={20} />,
+                desc: 'Unlocking the power of storytelling through the language of movement and music. Abhinaya taught the ability to communicate emotion, narrative, and devotion without a single word.',
+                image: '/images/photoshoot-glimpses/Sanjana-326-Edit_evotobak_(2).webp',
+                objectPosition: 'center 20%',
               },
               { 
                 title: 'Confidence', 
-                icon: <Heart className="text-gold" size={32} />,
-                desc: 'Building a source of inner strength that transcends the stage and shapes daily life.'
+                icon: <Heart className="text-gold" size={20} />,
+                desc: 'Building a source of inner strength that transcends the stage and shapes daily life. Dance became the foundation for self-assurance, poise, and the courage to step forward.',
+                image: '/images/photoshoot-glimpses/Sanjana-51-Edit.webp',
+                objectPosition: 'center 20%',
               }
             ].map((pillar, i) => (
               <motion.div 
@@ -332,20 +364,41 @@ const SanjanaDiddige = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.2 }}
-                className="p-12 glass-card gold-border-gradient group hover:bg-gold/5 transition-all duration-500"
+                transition={{ delay: i * 0.1 }}
+                className="flex items-center gap-6 glass-card gold-border-gradient p-6 group hover:bg-gold/5 transition-all duration-500"
               >
-                <div className="mb-8 flex justify-center group-hover:scale-110 transition-transform">{pillar.icon}</div>
-                <h3 className="text-2xl font-serif text-white mb-4 italic">{pillar.title}</h3>
-                <p className="text-gray-400 text-sm font-serif italic leading-relaxed">{pillar.desc}</p>
+                {/* Image thumbnail — increased size & added crisp downscaling */}
+                <div className="flex-shrink-0 w-28 h-28 md:w-36 md:h-36 rounded-xl overflow-hidden border border-white/10 shadow-lg bg-black/40">
+                  <img
+                    src={pillar.image}
+                    alt={pillar.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    style={{ 
+                      objectPosition: pillar.objectPosition,
+                      imageRendering: '-webkit-optimize-contrast' // Forces sharp bicubic downsampling in Chromium/WebKit
+                    }}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-2">
+                    {pillar.icon}
+                    <p className="text-[10px] uppercase tracking-[0.4em] text-[#D4AF37] font-bold">{pillar.title}</p>
+                  </div>
+                  <p className="text-gray-300 text-base leading-relaxed">{pillar.desc}</p>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
+
       {/* 4. ARANGETRAM MILESTONE SECTION */}
-      <section className="py-32 relative overflow-hidden bg-[#050505]">
+      {/* <section className="py-32 relative overflow-hidden bg-[#050505]">
         <div className="absolute inset-0 bg-[url('/images/photo_9.webp')] bg-cover opacity-10 grayscale" />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-transparent" />
         
@@ -368,7 +421,7 @@ const SanjanaDiddige = () => {
             </div>
           </motion.div>
         </div>
-      </section>
+      </section> */}
 
 
       {/* 5. RECOGNITION & ACHIEVEMENTS */}
@@ -473,12 +526,18 @@ const SanjanaDiddige = () => {
       </section> */}
 
       {/* ── PHILOSOPHY / MISSION / PASSION ── */}
-      <section className="section-padding bg-black">
+      {/* <section className="section-padding bg-black">
         <div className="container-luxury">
-          <motion.div {...fadeUp} className="text-center mb-16">
+          <motion.div 
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }} 
+            className="text-center mb-16"
+          >
             <p className="text-[11px] uppercase tracking-[0.5em] text-[#D4AF37] font-bold mb-4">Her Story</p>
-            <h2 className="font-serif text-5xl md:text-6xl text-white mb-6">Philosophy, Mission & Passion</h2>
-            <div className="section-title-divider" />
+            <h2 className="font-serif text-5xl md:text-6xl text-white mb-6 leading-tight">Philosophy, Mission & <span className="text-[#D4AF37]">Passion</span></h2>
+            <div className="w-12 h-px bg-[#D4AF37] mx-auto" />
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -546,67 +605,108 @@ const SanjanaDiddige = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
         {/* ── TIMELINE ── */}
       <section className="section-padding bg-[#0A0505]">
         <div className="container-luxury">
-          <motion.div {...fadeUp} className="text-center mb-20">
+          <motion.div 
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
             <p className="text-[11px] uppercase tracking-[0.5em] text-[#D4AF37] font-bold mb-4">A Dancer's Path</p>
-            <h2 className="font-serif text-5xl md:text-6xl text-white mb-6">My Journey So Far</h2>
-            <div className="section-title-divider" />
+            <h2 className="font-serif text-5xl md:text-6xl text-white mb-6 leading-tight">My Journey <span className="text-[#D4AF37]">So Far</span></h2>
+            <div className="w-12 h-px bg-[#D4AF37] mx-auto" />
           </motion.div>
 
           <div className="relative" ref={timelineRef}>
-            {/* Centre line background (faint) */}
+            {/* Desktop Centre line background */}
             <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-white/5" />
             
-            {/* Animated Centre line — grows on scroll */}
+            {/* Desktop Animated Centre line */}
             <motion.div 
               style={{ scaleY }}
               className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-[#D4AF37]/60 origin-top shadow-[0_0_15px_rgba(212,175,55,0.3)]" 
             />
 
-            <div className="flex flex-col gap-16">
+            {/* Mobile Left line background */}
+            <div className="md:hidden absolute left-8 top-0 bottom-0 w-px bg-white/5" />
+            <motion.div 
+              style={{ scaleY }}
+              className="md:hidden absolute left-8 top-0 bottom-0 w-px bg-[#D4AF37]/60 origin-top shadow-[0_0_15px_rgba(212,175,55,0.3)]" 
+            />
+
+            <div className="flex flex-col gap-12 md:gap-16">
               {timeline.map((item, i) => (
                 <motion.div
-                  key={item.year}
-                  initial={{ opacity: 0, x: item.side === 'left' ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  key={item.year + item.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: 0.1 }}
-                  className={`relative flex flex-col md:flex-row items-center gap-8 ${
-                    item.side === 'right' ? 'md:flex-row-reverse' : ''
-                  }`}
+                  className="relative flex items-center md:justify-between group"
                 >
-                  {/* Card */}
-                  <div className="w-full md:w-[45%]">
-                    <div className="glass-card gold-border-gradient overflow-hidden group">
-                      <div className="h-[320px] overflow-hidden">
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                          style={{ objectPosition: item.objectPosition || 'top' }}
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </div>
-                      <div className="p-7">
-                        <p className="text-[11px] uppercase tracking-[0.4em] text-[#D4AF37] font-bold mb-2">{item.year}</p>
-                        <h3 className="font-serif text-2xl text-white mb-3">{item.title}</h3>
-                        <p className="text-gray-400 text-sm leading-relaxed">{item.description}</p>
-                      </div>
+                  {/* Mobile layout: badge on left line, card on right */}
+                  <div className="absolute left-8 -translate-x-1/2 md:hidden w-12 h-12 rounded-full border-2 border-[#D4AF37] overflow-hidden z-10 bg-black shadow-lg flex-shrink-0">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                      style={{ objectPosition: item.objectPosition || 'top' }}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+
+                  {/* Mobile Card Container */}
+                  <div className="w-full pl-20 md:hidden">
+                    <div className="glass-card gold-border-gradient p-6 bg-black/40 backdrop-blur-md shadow-xl hover:bg-gold/5 transition-all duration-500">
+                      <p className="text-[11px] uppercase tracking-[0.4em] text-[#D4AF37] font-bold mb-2">{item.year}</p>
+                      <h3 className="font-serif text-xl text-white mb-2">{item.title}</h3>
+                      <p className="text-gray-300 text-sm leading-relaxed">{item.description}</p>
                     </div>
                   </div>
 
-                  {/* Centre dot */}
-                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-black border-2 border-[#D4AF37] items-center justify-center z-10 gold-glow">
-                    <span className="text-[#D4AF37] font-serif font-bold text-xs">{item.year.slice(2)}</span>
+                  {/* Desktop Layout: Left Box / Center Badge / Right Box */}
+                  {/* Left Box */}
+                  <div className="hidden md:flex w-[45%] pr-12 items-center justify-end">
+                    {item.side === 'left' ? (
+                      <div className="w-full glass-card gold-border-gradient p-7 bg-black/40 backdrop-blur-md shadow-xl hover:bg-gold/5 transition-all duration-500 text-left">
+                        <h3 className="font-serif text-2xl text-white mb-3 group-hover:text-[#D4AF37] transition-colors">{item.title}</h3>
+                        <p className="text-gray-300 text-base leading-relaxed">{item.description}</p>
+                      </div>
+                    ) : (
+                      <span className="font-serif text-3xl text-[#D4AF37] font-bold tracking-widest">{item.year}</span>
+                    )}
                   </div>
 
-                  {/* Spacer opposite side */}
-                  <div className="hidden md:block w-[45%]" />
+                  {/* Center Badge */}
+                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-16 h-16 rounded-full border-2 border-[#D4AF37] overflow-hidden z-10 bg-black shadow-[0_0_20px_rgba(212,175,55,0.2)] group-hover:scale-110 group-hover:border-white transition-all duration-500 flex-shrink-0">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                      style={{ objectPosition: item.objectPosition || 'top' }}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+
+                  {/* Right Box */}
+                  <div className="hidden md:flex w-[45%] pl-12 items-center justify-start">
+                    {item.side === 'right' ? (
+                      <div className="w-full glass-card gold-border-gradient p-7 bg-black/40 backdrop-blur-md shadow-xl hover:bg-gold/5 transition-all duration-500 text-left">
+                        <h3 className="font-serif text-2xl text-white mb-3 group-hover:text-[#D4AF37] transition-colors">{item.title}</h3>
+                        <p className="text-gray-300 text-base leading-relaxed">{item.description}</p>
+                      </div>
+                    ) : (
+                      <span className="font-serif text-3xl text-[#D4AF37] font-bold tracking-widest">{item.year}</span>
+                    )}
+                  </div>
+
                 </motion.div>
               ))}
             </div>

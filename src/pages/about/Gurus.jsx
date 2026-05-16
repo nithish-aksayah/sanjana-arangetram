@@ -7,7 +7,6 @@ const Gurus = () => {
   const [lightboxIndex, setLightboxIndex] = useState(null);
   
   const memoryImages = [
-    '/images/Sanjana Website/20220528_172006.jpg',
     '/images/Sanjana Website/IMG_5590.jpg',
     '/images/Sanjana Website/IMG_5578.jpg'
   ];
@@ -37,28 +36,28 @@ const Gurus = () => {
     <div className="bg-black text-white overflow-hidden selection:bg-gold/30">
       
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[100vh] flex items-center justify-center pt-20">
+      <section className="relative min-h-[70vh] flex items-end pb-16 pt-32 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <DustParticles />
           <div className="absolute inset-0 bg-[url('/images/Sanjana%20Website/about-us-banner.jpg')] bg-cover bg-[center_25%] opacity-90" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black to-black" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30" />
           {/* Decorative Accents */}
           <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
         </div>
 
-        <div className="container-luxury relative z-10 text-center">
+        <div className="container-luxury relative z-10 text-left">
           <motion.div 
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <p className="text-gold uppercase tracking-[0.5em] text-xs font-bold mb-6">Guiding Lights</p>
-            <h1 className="text-6xl md:text-8xl font-serif mb-8 italic">About the Gurus</h1>
-            <p className="text-xl md:text-2xl font-serif text-white/60 italic max-w-3xl mx-auto leading-relaxed">
+            <p className="text-gold uppercase tracking-[0.5em] text-xs font-bold mb-4">Guiding Lights</p>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif mb-6 text-white leading-tight">About the <span className="text-[#D4AF37]">Gurus</span></h1>
+            <p className="text-lg md:text-xl font-sans text-gray-300 max-w-3xl leading-relaxed mb-6">
               "To her students, she is more than a teacher—she is a mentor, a guide, a second mother."
             </p>
-            <div className="mt-12 w-24 h-px bg-gold/50 mx-auto" />
+            <div className="w-24 h-px bg-[#D4AF37]" />
           </motion.div>
         </div>
       </section>
@@ -69,18 +68,20 @@ const Gurus = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             
             {/* Image Column */}
-            <div className="lg:col-span-5 relative group">
+            <div className="lg:col-span-5 relative group mx-auto w-full max-w-sm lg:max-w-none">
               <motion.div 
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="relative z-10 aspect-[3/4] rounded-2xl overflow-hidden gold-border-gradient shadow-2xl transition-transform duration-500 group-hover:-translate-y-2"
+                className="relative z-10 aspect-[3/4] rounded-2xl overflow-hidden gold-border-gradient shadow-2xl transition-transform duration-500 group-hover:-translate-y-2 bg-black/40 border border-gold/20"
               >
                 <img 
                   src="/images/gurus/Dina Sheth.webp" 
                   alt="Guru Mrs. Dina Sheth" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000"
+                  loading="lazy"
+                  decoding="async"
                 />
               </motion.div>
               {/* Decorative Frame */}
@@ -88,7 +89,7 @@ const Gurus = () => {
             </div>
 
             {/* Content Column */}
-            <div className="lg:col-span-7 space-y-10">
+            <div className="lg:col-span-7 space-y-10 text-left">
               <motion.div 
                 variants={fadeUp}
                 initial="hidden"
@@ -99,8 +100,8 @@ const Gurus = () => {
                   <div className="h-px w-12 bg-gold/30" />
                   <span className="uppercase tracking-widest text-[10px] font-bold">The Visionary Founder</span>
                 </div>
-                <h2 className="text-5xl md:text-6xl font-serif mb-8 italic">Mrs. <span className="text-gold">Dina Sheth</span></h2>
-                <div className="space-y-6 text-gray-300 font-serif text-lg leading-relaxed italic">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-8 leading-tight text-white">Mrs. <span className="text-[#D4AF37]">Dina Sheth</span></h2>
+                <div className="space-y-6 text-gray-300 font-sans text-lg leading-relaxed">
                   <p>
                     Mrs. Dina Sheth is the visionary Founder of Kruti Dance Academy—a nationally and globally acclaimed institution dedicated to the preservation and evolution of Indian classical arts. Since its inception in 1994, Kruti has flourished under her passionate guidance, becoming a sanctuary where tradition meets transformation.
                   </p>
@@ -157,7 +158,7 @@ const Gurus = () => {
               >
                 <div className="text-gold mb-6">{item.icon}</div>
                 <h4 className="text-white font-serif text-xl mb-4">{item.title}</h4>
-                <p className="text-gray-400 text-sm italic font-serif leading-relaxed">{item.desc}</p>
+                <p className="text-gray-300 text-sm font-sans leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -170,7 +171,7 @@ const Gurus = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center flex-row-reverse">
             
             {/* Content Column */}
-            <div className="lg:col-span-7 order-2 lg:order-1 space-y-10">
+            <div className="lg:col-span-7 order-2 lg:order-1 space-y-10 text-left">
               <motion.div 
                 variants={fadeUp}
                 initial="hidden"
@@ -181,8 +182,8 @@ const Gurus = () => {
                   <div className="h-px w-12 bg-gold/30" />
                   <span className="uppercase tracking-widest text-[10px] font-bold">Artistic Director</span>
                 </div>
-                <h2 className="text-5xl md:text-6xl font-serif mb-8 italic">Mrs. <span className="text-gold">Shemoni Parekh</span></h2>
-                <div className="space-y-6 text-gray-300 font-serif text-lg leading-relaxed italic">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-8 leading-tight text-white">Mrs. <span className="text-[#D4AF37]">Shemoni Parekh</span></h2>
+                <div className="space-y-6 text-gray-300 font-sans text-lg leading-relaxed">
                   <p>
                     As the Artistic Director of Kruti Dance Academy, Shemoni Parekh is a luminous force for masterful and innovative choreography. She embodies the unique confluence of Indian classical heritage melded with the flair and heartbeat of global modern dance styles.
                   </p>
@@ -219,18 +220,20 @@ const Gurus = () => {
             </div>
 
             {/* Image Column */}
-            <div className="lg:col-span-5 order-1 lg:order-2 relative group">
+            <div className="lg:col-span-5 order-1 lg:order-2 relative group mx-auto w-full max-w-sm lg:max-w-none">
               <motion.div 
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className="relative z-10 aspect-[3/4] rounded-2xl overflow-hidden gold-border-gradient shadow-2xl transition-transform duration-500 group-hover:-translate-y-2"
+                className="relative z-10 aspect-[3/4] rounded-2xl overflow-hidden gold-border-gradient shadow-2xl transition-transform duration-500 group-hover:-translate-y-2 bg-black/40 border border-gold/20"
               >
                 <img 
                   src="/images/gurus/Shemoni Parekh.webp" 
                   alt="Artistic Director Mrs. Shemoni Parekh" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000"
+                  loading="lazy"
+                  decoding="async"
                 />
               </motion.div>
               <div className="absolute -top-6 -right-6 w-full h-full border border-gold/10 rounded-2xl -z-10 group-hover:top-0 group-hover:right-0 transition-all duration-700" />
@@ -241,9 +244,9 @@ const Gurus = () => {
       </section>
 
       {/* 5. LEGACY SECTION */}
-      <section className="py-32 relative text-center bg-[#050505]">
+      <section className="py-12 relative text-center bg-[#050505]">
         <div className="container-luxury relative z-10">
-          <motion.div 
+          {/* <motion.div 
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
@@ -251,8 +254,8 @@ const Gurus = () => {
             className="max-w-3xl mx-auto space-y-10"
           >
             <Award className="text-gold mx-auto shadow-glow" size={48} />
-            <h2 className="text-4xl md:text-6xl font-serif italic mb-8">A Legacy of <span className="text-gold">Inspiration</span></h2>
-            <p className="text-xl md:text-2xl font-serif text-white/60 italic leading-relaxed">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-8 leading-tight text-white">A Legacy of <span className="text-[#D4AF37]">Inspiration</span></h2>
+            <p className="text-xl md:text-2xl font-sans text-gray-300 leading-relaxed max-w-2xl mx-auto">
               Together, Guru Dina Sheth and Shemoni Parekh continue to elevate Kruti Dance Academy as a notable event in Atlanta’s artistic calendar, bridging ancient wisdom with modern expression.
             </p>
             <div className="pt-10 flex flex-wrap justify-center gap-6">
@@ -266,9 +269,9 @@ const Gurus = () => {
                 Innovation in Dance
               </div>
             </div>
-          </motion.div>
+          </motion.div> */}
 
-          <div className="mt-32 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+          <div className="mt-22 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
             {memoryImages.map((src, idx) => (
               <motion.div 
                 key={idx} 
@@ -276,11 +279,11 @@ const Gurus = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                className={`relative aspect-[3/4] rounded-2xl overflow-hidden gold-border-gradient shadow-2xl group cursor-pointer ${idx === 1 ? 'md:-translate-y-12' : ''}`}
+                className="relative aspect-[3/4] rounded-2xl overflow-hidden gold-border-gradient shadow-2xl group cursor-pointer bg-black/40 border border-gold/20"
                 onClick={() => setLightboxIndex(idx)}
               >
                 <img src={src} alt="Memory with Guru" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" />
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
                   <div className="flex items-center gap-2 text-white/80 uppercase tracking-widest text-xs font-bold">
                     <Maximize2 size={16} />
                   </div>
