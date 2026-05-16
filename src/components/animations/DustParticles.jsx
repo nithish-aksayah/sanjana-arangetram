@@ -1,35 +1,43 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { motion } from 'framer-motion';
 
-const DustParticles = () => {
-  // Only render if window is defined to avoid issues during potential SSR,
-  // though Vite is mostly CSR.
-  if (typeof window === 'undefined') return null;
+// Generate random particle configs ONCE at module scope — never recalculated
+// on re-renders. This prevents 20 Framer Motion elements from restarting
+// their animations whenever the parent component re-renders.
+const PARTICLE_COUNT = 20;
+const particles = Array.from({ length: PARTICLE_COUNT }, (_, i) => ({
+  id: i,
+  x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
+  y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
+  targetY: Math.random() * -200 - 100,
+  targetX: Math.random() * 100 - 50,
+  duration: Math.random() * 10 + 10,
+}));
 
+const DustParticles = memo(() => {
   return (
     <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-      {[...Array(20)].map((_, i) => (
+      {particles.map((p) => (
         <motion.div
-          key={i}
+          key={p.id}
           className="absolute w-1 h-1 bg-gold rounded-full opacity-20"
-          initial={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-          }}
+          initial={{ x: p.x, y: p.y }}
           animate={{
-            y: [null, Math.random() * -200 - 100],
-            x: [null, Math.random() * 100 - 50],
+            y: [null, p.targetY],
+            x: [null, p.targetX],
             opacity: [0.2, 0.5, 0],
           }}
           transition={{
-            duration: Math.random() * 10 + 10,
+            duration: p.duration,
             repeat: Infinity,
-            ease: "linear",
+            ease: 'linear',
           }}
         />
       ))}
     </div>
   );
-};
+});
+
+DustParticles.displayName = 'DustParticles';
 
 export default DustParticles;

@@ -1,11 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { invitationData } from '../../data/content';
 import DustParticles from '../animations/DustParticles';
 
-const Hero = () => {
+// Preload all hero images so the browser fetches them before they appear
+const preloadImages = (urls) => {
+  urls.forEach((url) => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = url;
+    document.head.appendChild(link);
+  });
+};
+
+const Hero = memo(() => {
   const navigate = useNavigate();
   const images = invitationData.hero.sliderImages || [
     '/images/Sanjana-glimpse-01.webp',
@@ -15,6 +26,11 @@ const Hero = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Preload all images once on mount — browser caches them immediately
+  useEffect(() => {
+    preloadImages(images);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
@@ -22,8 +38,8 @@ const Hero = () => {
     return () => clearInterval(timer);
   }, [images.length]);
 
-  const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % images.length);
-  const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  const nextSlide = useCallback(() => setCurrentIndex((prev) => (prev + 1) % images.length), [images.length]);
+  const prevSlide = useCallback(() => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length), [images.length]);
 
   return (
     <section className="relative min-h-[90vh] lg:min-h-screen flex items-center bg-black overflow-hidden pt-24 lg:pt-0">
@@ -104,20 +120,30 @@ const Hero = () => {
               {/* Animated Frame */}
               <div className="absolute inset-0 border border-white/10 rounded-2xl z-20 pointer-events-none group-hover:border-gold/30 transition-colors duration-700"></div>
               
-              <AnimatePresence mode="wait">
+              {/* 
+                PERFORMANCE FIX: Render ALL images in a CSS stack instead of
+                using AnimatePresence key={currentIndex}. The old approach
+                destroyed+remounted the <img> DOM node on every slide change,
+                forcing the browser to re-fetch even cached images.
+                Now every image is always mounted; only opacity/z-index changes.
+              */}
+              {images.map((src, idx) => (
                 <motion.img
-                  key={currentIndex}
-                  src={images[currentIndex]}
+                  key={src}
+                  src={src}
                   alt={invitationData.event.dancerName}
-                  initial={{ opacity: 0, scale: 1.05 }} 
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
+                  animate={{
+                    opacity: idx === currentIndex ? 1 : 0,
+                    scale: idx === currentIndex ? 1 : 1.05,
+                    zIndex: idx === currentIndex ? 10 : 5,
+                  }}
                   transition={{ duration: 1, ease: [0.4, 0, 0.2, 1] }}
-                  className="w-full h-full object-cover relative z-10 drop-shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
-                  loading={currentIndex === 0 ? "eager" : "lazy"}
-                  decoding="sync"
+                  className="absolute inset-0 w-full h-full object-cover drop-shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+                  loading={idx === 0 ? 'eager' : 'lazy'}
+                  fetchpriority={idx === 0 ? 'high' : 'low'}
+                  decoding="async"
                 />
-              </AnimatePresence>
+              ))}
 
               {/* Slider Controls */}
               <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-6 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -153,6 +179,8 @@ const Hero = () => {
       </div>
     </section>
   );
-};
+});
+
+Hero.displayName = 'Hero';
 
 export default Hero;

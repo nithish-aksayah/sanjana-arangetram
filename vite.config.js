@@ -5,6 +5,9 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
+    // Prevent small images from being base64-inlined — inlined images bypass
+    // the browser cache entirely, causing them to re-decode on every render.
+    assetsInlineLimit: 0,
     rollupOptions: {
       output: {
         manualChunks(id) {
@@ -21,5 +24,13 @@ export default defineConfig({
       }
     },
     chunkSizeWarningLimit: 1000
+  },
+  // Dev server: send proper cache headers so browser caches public/images
+  // between page navigations without re-fetching
+  server: {
+    headers: {
+      'Cache-Control': 'public, max-age=86400'
+    }
   }
 })
+
