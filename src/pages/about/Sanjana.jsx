@@ -396,6 +396,73 @@ const SanjanaDiddige = () => {
         </div>
       </section>
 
+      {/* ── PHILOSOPHY / MISSION / PASSION ── */}
+      <section className="section-padding bg-black">
+        <div className="container-luxury">
+          <div className="max-w-7xl mx-auto space-y-16">
+            <motion.div 
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              <p className="text-[11px] uppercase tracking-[0.5em] text-[#D4AF37] font-bold mb-4">Her Story</p>
+              <h2 className="font-serif text-4xl md:text-5xl text-white mb-6 leading-tight">Philosophy, Mission & <span className="text-[#D4AF37]">Passion</span></h2>
+              <div className="w-12 h-px bg-[#D4AF37] mx-auto" />
+            </motion.div>
+
+            {[
+              {
+                icon: '✦',
+                label: 'Life Philosophy',
+                heading: 'Aut Inveniam Viam Aut Faciam',
+                body: `I didn’t go searching for a life philosophy; I stumbled into one during arangetram practice — somewhere between exhausted calves, relentless adavus, and late-night desperation.
+
+A single Latin phrase stayed with me:
+Aut inveniam viam aut faciam — “I shall either find a way or make one.”
+
+Over time, Bharatanatyam taught me that perseverance is not about perfection. It is about continuing through exhaustion, repetition, doubt, and discipline — returning each day to grow a little further through the art.`,
+              },
+              {
+                icon: '❋',
+                label: 'My Mission',
+                heading: 'Preserving Tradition Through Practice',
+                body: `Through Bharatanatyam, I have remained deeply connected to my cultural roots while learning the value of discipline, devotion, and artistic expression.
+
+I believe traditions survive not simply because they are remembered, but because they are continuously practiced, shared, and carried forward through each generation.`,
+              },
+              {
+                icon: '◈',
+                label: 'My Passion',
+                heading: 'The Language of Movement',
+                body: `What draws me most to Bharatanatyam is its ability to tell stories through rhythm, expression, and movement. From portraying devotion and courage to joy and longing, dance becomes a language capable of expressing emotions words often cannot.
+
+Through abhinaya, I have come to love the power of storytelling woven through classical movement and music.`,
+              },
+            ].map((card, i) => (
+              <motion.div
+                key={card.label}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: i * 0.1 }}
+                className="text-left space-y-4"
+              >
+                <div className="flex items-center gap-3 text-[#D4AF37]">
+                  <span className="text-lg">{card.icon}</span>
+                  <span className="text-[11px] uppercase tracking-[0.4em] font-bold">{card.label}</span>
+                </div>
+                <h3 className="font-serif text-3xl md:text-4xl text-white font-medium">{card.heading}</h3>
+                <p className="text-gray-300 text-base md:text-lg leading-relaxed whitespace-pre-line pt-2">
+                  {card.body}
+                </p>
+                {i < 2 && <div className="pt-10 border-b border-white/5" />}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* 4. ARANGETRAM MILESTONE SECTION */}
       {/* <section className="py-32 relative overflow-hidden bg-[#050505]">
@@ -525,87 +592,7 @@ const SanjanaDiddige = () => {
         </div>
       </section> */}
 
-      {/* ── PHILOSOPHY / MISSION / PASSION ── */}
-      {/* <section className="section-padding bg-black">
-        <div className="container-luxury">
-          <motion.div 
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }} 
-            className="text-center mb-16"
-          >
-            <p className="text-[11px] uppercase tracking-[0.5em] text-[#D4AF37] font-bold mb-4">Her Story</p>
-            <h2 className="font-serif text-5xl md:text-6xl text-white mb-6 leading-tight">Philosophy, Mission & <span className="text-[#D4AF37]">Passion</span></h2>
-            <div className="w-12 h-px bg-[#D4AF37] mx-auto" />
-          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: '✦',
-                label: 'Life Philosophy',
-                heading: 'Aut Inveniam Viam Aut Faciam',
-                body: 'I didn\'t go searching for a life philosophy; I stumbled into one during arangetram practice — somewhere between exhausted calves, relentless adavus, and late-night desperation.\nA single Latin phrase stayed with me: Aut inveniam viam aut faciam — “I shall either find a way or make one.Over time, Bharatanatyam taught me that perseverance is not about perfection. It is about continuing through exhaustion, repetition, doubt, and discipline — returning each day to grow a little further through the art.”\n',
-                image: '/images/photoshoot-glimpses/Sanjana-691-Edit.webp',
-                objectPosition: "top"
-              },
-              {
-                icon: '❋',
-                label: 'My Mission',
-                heading: 'Preserving Tradition Through Practice',
-                body: 'Through Bharatanatyam, I have remained deeply connected to my cultural roots while learning the value of discipline, devotion, and artistic expression. I believe traditions survive not simply because they are remembered, but because they are continuously practiced, shared, and carried forward through each generation.',
-                image: '/images/photoshoot-glimpses/Sanjana-326-Edit_evotobak_(2).webp',
-                objectPosition: "top "
-              },
-              {
-                icon: '◈',
-                label: 'My Passion',
-                heading: 'The Language of Movement',
-                body: 'What draws me most to Bharatanatyam is its ability to tell stories through rhythm, expression, and movement. From portraying devotion and courage to joy and longing, dance becomes a language capable of expressing emotions words often cannot.Through abhinaya, I have come to love the power of storytelling woven through classical movement and music.',
-                image: '/images/photoshoot-glimpses/Sanjana-51-Edit.webp',
-                objectPosition: "top"
-              },
-            ].map((card, i) => (
-              <motion.div
-                key={card.label}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: i * 0.15 }}
-                className="glass-card gold-border-gradient overflow-hidden group"
-              >
-                <div className="h-[320px] overflow-hidden">
-                  <img
-                    src={card.image}
-                    alt={card.heading}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    style={{ objectPosition: card.objectPosition || 'center 45%' }}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <div className="p-8">
-                  <p className="text-[#D4AF37] text-lg mb-2">{card.icon}</p>
-                  <p className="text-[10px] uppercase tracking-[0.4em] text-[#D4AF37] font-bold mb-3">{card.label}</p>
-                  <h3 className="font-serif text-2xl text-white mb-4">{card.heading}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed whitespace-pre-line">
-                    {expandedIndex === i ? card.body : `${card.body.slice(0, 160)}...`}
-                  </p>
-                  {card.body.length > 160 && (
-                    <button 
-                      onClick={() => setExpandedIndex(expandedIndex === i ? null : i)}
-                      className="mt-4 text-[#D4AF37] text-[10px] uppercase tracking-[0.2em] font-bold hover:text-white transition-colors"
-                    >
-                      {expandedIndex === i ? 'Read Less' : 'Read More'}
-                    </button>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section> */}
 
         {/* ── TIMELINE ── */}
       <section className="section-padding bg-[#0A0505]">
