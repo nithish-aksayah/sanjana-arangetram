@@ -87,7 +87,6 @@ export const invitationData = {
       { url: '/images/photoshoot-glimpses/Sanjana-110-Edit.webp', title: 'Photoshoot Glimpse' },
       { url: '/images/photoshoot-glimpses/Sanjana-154-Edit.webp', title: 'Photoshoot Glimpse' },
       { url: '/images/photoshoot-glimpses/Sanjana-174-Edit_evotobak_(2).webp', title: 'Photoshoot Glimpse' },
-      { url: '/images/photoshoot-glimpses/Sanjana-174-Edit_evotobak_(2)_vignette.webp', title: 'Photoshoot Glimpse' },
       { url: '/images/photoshoot-glimpses/Sanjana-187-Edit.webp', title: 'Photoshoot Glimpse' },
       { url: '/images/photoshoot-glimpses/Sanjana-250-Edit.webp', title: 'Photoshoot Glimpse' },
       { url: '/images/photoshoot-glimpses/Sanjana-267-Edit.webp', title: 'Photoshoot Glimpse' },
