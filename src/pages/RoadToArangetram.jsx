@@ -1,28 +1,80 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Sparkles, Clock, Heart, ChevronDown, Quote, Music, BookOpen } from 'lucide-react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules';
+import { motion, AnimatePresence } from 'framer-motion';
 import DustParticles from '../components/animations/DustParticles';
-import TimelineConnector from '../components/ui/TimelineConnector';
-import 'swiper/css';
-import 'swiper/css/effect-fade';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+
+const timelineEvents = [
+  {
+    date: 'AUGUST 2025',
+    title: 'Endless Repetition,\nQuiet Refinement',
+    description: 'With the beginning of private arangetram rehearsals, training entered a far more demanding rhythm.',
+    image: '/images/sanjana website - Road to arangetram/IMG_2621.jpg'
+  },
+  {
+    date: 'AUGUST 2025 ⟶ DECEMBER 2025',
+    title: 'A Journey Deepens',
+    description: 'Rehearsals transformed into instinct — adavus practiced until tāla settled naturally into the body and every detail carried intention.',
+    image: '/images/Sanjana Website - My journey so far/DSC_0417.webp'
+  },
+  {
+    date: 'DECEMBER 2025',
+    title: 'Details Taking Shape',
+    description: 'As the arangetram moved closer to reality, costume fittings, temple jewelry, and stage decisions came together with growing clarity.',
+    image: '/images/Sanjana Website/IMG_1210.JPG'
+  },
+  {
+    date: 'JANUARY 2026',
+    title: 'The Final Stretch',
+    description: 'The final phase of preparation — polishing, perfecting, and preparing to share the art that has been lived every single day.',
+    image: '/images/photoshoot-glimpses/Sanjana-318-Edit.webp',
+    objectPosition: 'top'
+  },
+  {
+    date: 'FEBRUARY 2026',
+    title: 'Capturing the Artist',
+    description: 'The photoshoot became more than preparation for an event; it became a way of preserving a moment suspended between student and performer.',
+    image: '/images/photoshoot-glimpses/Sanjana-110-Edit.webp',
+    objectPosition: 'top'
+  },
+  {
+    date: 'MAY 2026',
+    title: 'The First Invitation',
+    description: 'Before reaching family and friends, the first invitation was offered to my gurus during a pooja — a quiet moment of gratitude and blessing.',
+    image: '/images/Invitation.webp'
+  },
+  {
+    date: 'JULY 1, 2026',
+    title: 'First Steps onto the Stage',
+    description: 'The first stage rehearsal transformed the performance from imagination into reality. Familiar movements suddenly carried a different weight.',
+    image: '/images/sanjana website - Road to arangetram/IMG_2782.jpg'
+  }
+];
 
 const RoadToArangetram = () => {
-  const [daysLeft, setDaysLeft] = useState(0);
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
-    const targetDate = new Date('2026-07-25T18:00:00');
+    // Target Date in US Eastern Time (EDT): July 25, 2026 at 6:00 PM
+    const targetDate = new Date('2026-07-25T18:00:00-04:00'); 
+    
     const updateCountdown = () => {
       const now = new Date();
       const difference = targetDate - now;
-      const days = Math.ceil(difference / (1000 * 60 * 60 * 24));
-      setDaysLeft(days > 0 ? days : 0);
+      
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60)
+        });
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      }
     };
+    
     updateCountdown();
-    const interval = setInterval(updateCountdown, 86400000);
+    const interval = setInterval(updateCountdown, 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -69,314 +121,171 @@ const RoadToArangetram = () => {
         </div>
       </section>
 
-      {/* SECTION WRAPPER TO CONTROL GAPS */}
-      <div className="relative">
-        
-        <TimelineConnector title="The Journey Begins" />
-
-        {/* 2. REHEARSALS SECTION */}
-        <section className="py-10 relative">
-          <div className="container-luxury">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
-              <motion.div 
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="lg:col-span-7 space-y-4 text-left"
-              >
-                <span className="text-gold uppercase tracking-widest text-[10px] font-bold">August 2025</span>
-                <h2 className="text-4xl md:text-5xl italic leading-tight text-white">Endless Repetition, <br/>Quiet Refinement</h2>
-                <p className="text-gray-300 font-sans text-lg leading-relaxed">
-                  With the beginning of private arangetram rehearsals, training entered a far more demanding rhythm. Long evenings of repetition, correction, and refinement slowly transformed movement into instinct — adavus practiced until tāla settled naturally into the body and every detail carried intention.
-                </p>
-                <div className="flex gap-4 pt-4">
-                  <div className="w-12 h-px bg-gold/30 mt-3" />
-                  <p className="text-gold/60 text-sm uppercase tracking-widest font-sans">Mirror Reflections & Ankle Bells</p>
-                </div>
-              </motion.div>
-              <motion.div 
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="lg:col-span-5 relative group max-w-[280px] mx-auto lg:max-w-none w-full"
-              >
-                <div className="aspect-[4/3] glass-card gold-border-gradient overflow-hidden bg-black/40 border border-gold/20">
-                  <Swiper
-                    modules={[Autoplay, EffectFade, Pagination]}
-                    effect="fade"
-                    autoplay={{ delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true }}
-                    loop={true}
-                    pagination={{ clickable: true }}
-                    observer={true}
-                    observeParents={true}
-                    watchSlidesProgress={true}
-                    preloadImages={false}
-                    className="w-full h-full luxury-swiper"
-                  >
-                    {[
-                      'IMG_2621.jpg',
-                      'IMG_2759.jpg',
-                      'IMG_2763.jpg',
-                      'IMG_2782.jpg'
-                    ].map((img, idx) => (
-                      <SwiperSlide key={idx}>
-                        <div className="relative w-full h-full overflow-hidden">
-                          <img 
-                            src={`/images/sanjana website - Road to arangetram/${img}`} 
-                            alt={`Practice ${idx + 1}`} 
-                            className="w-full h-full object-cover animate-ken-burns"
-                            loading="lazy"
-                            decoding="async"
-                          />
-                        </div>
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                </div>
-                <div className="absolute -top-4 -right-4 text-8xl font-serif text-gold/5 -z-10">01</div>
-              </motion.div>
+      {/* 2. VERTICAL TIMELINE SECTION */}
+      <section className="py-24 relative bg-black">
+        <div className="container-luxury">
+          
+          <div className="text-center mb-24 relative">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-16 h-px bg-gradient-to-r from-transparent to-gold/60" />
+              <div className="w-2.5 h-2.5 rotate-45 bg-gold" />
+              <div className="w-16 h-px bg-gradient-to-l from-transparent to-gold/60" />
             </div>
+            <h2 className="font-serif italic text-4xl md:text-5xl text-white">The Journey Continues</h2>
           </div>
-        </section>
 
-        <TimelineConnector 
-          fromDate="August 2025" 
-          toDate="December 2025" 
-          title="A Journey Deepens" 
-        />
+          <div className="relative max-w-5xl mx-auto pt-8">
+            {/* Desktop Center Line */}
+            <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-gold/20 via-gold/50 to-gold/10" />
 
-        {/* 3. DETAILS TAKING SHAPE */}
-        <section className="py-10 relative bg-[#050505]/50">
-          <div className="container-luxury">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
-              <motion.div 
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="lg:col-span-5 order-2 lg:order-1 max-w-[280px] mx-auto lg:max-w-none w-full"
-              >
-                <div className="aspect-square glass-card gold-border-gradient overflow-hidden bg-black/40 border border-gold/20">
-                  <Swiper
-                    modules={[Autoplay, EffectFade, Pagination]}
-                    effect="fade"
-                    autoplay={{ delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true }}
-                    loop={true}
-                    pagination={{ clickable: true }}
-                    observer={true}
-                    observeParents={true}
-                    watchSlidesProgress={true}
-                    preloadImages={false}
-                    className="w-full h-full luxury-swiper"
+            {/* Mobile Left Line */}
+            <div className="md:hidden absolute left-4 top-0 bottom-0 w-px bg-gradient-to-b from-gold/20 via-gold/50 to-gold/10" />
+
+            <div className="flex flex-col gap-12 md:gap-20 relative z-10">
+              {timelineEvents.map((item, i) => {
+                const isLeft = i % 2 === 0;
+
+                return (
+                  <motion.div
+                    key={i}
+                    variants={fadeUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    className={`relative flex items-center justify-between w-full group ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'} flex-col`}
                   >
-                    {[
-                      '/images/Sanjana Website/IMG_1210.JPG',
-                      '/images/Sanjana Website - My journey so far/DSC_0417.webp',
-                      '/images/Sanjana Website - My journey so far/0535_mb1040.webp',
-                      '/images/Sanjana Website - My journey so far/Copy of DSC_0283.webp'
-                    ].map((img, idx) => (
-                      <SwiperSlide key={idx}>
-                        <div className="relative w-full h-full overflow-hidden">
-                          <img 
-                            src={img} 
-                            alt={`Detail ${idx + 1}`} 
-                            className="w-full h-full object-cover animate-ken-burns"
-                            loading="lazy"
-                            decoding="async"
-                          />
+                    
+                    {/* CENTER DOT */}
+                    <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-gold border-[4px] border-black shadow-[0_0_15px_rgba(212,175,55,0.4)] z-20" />
+
+                    {/* MOBILE DATE (Visible only on mobile) */}
+                    <div className="md:hidden w-full pl-12 mb-4 text-left">
+                      <span className="text-gold uppercase tracking-[0.2em] text-[10px] font-bold drop-shadow-md">
+                        {item.date}
+                      </span>
+                    </div>
+
+                    {/* CARD CONTAINER */}
+                    <div className={`w-full md:w-[45%] pl-12 md:pl-0 flex ${isLeft ? 'md:justify-end' : 'md:justify-start'}`}>
+                      <div className="glass-card gold-border-gradient bg-[#0A0A0A] p-6 rounded-[1.25rem] border border-gold/20 hover:border-gold/40 transition-all duration-500 w-full max-w-lg shadow-2xl">
+                        <div className={`flex flex-col-reverse ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'} gap-6 items-center`}>
+                          
+                          {/* TEXT SIDE */}
+                          <div className="flex-1 text-left w-full">
+                            <p className="text-gold uppercase tracking-[0.2em] text-[9px] md:text-[10px] font-bold mb-3 hidden md:block">
+                              {item.date}
+                            </p>
+                            <h3 className="font-serif italic text-2xl md:text-[1.75rem] text-white mb-3 whitespace-pre-line leading-tight">
+                              {item.title}
+                            </h3>
+                            <p className="font-sans text-gray-400 text-[13px] md:text-sm leading-relaxed">
+                              {item.description}
+                            </p>
+                          </div>
+
+                          {/* IMAGE SIDE */}
+                          <div 
+                            className="w-full md:w-[150px] aspect-[4/3] rounded-xl overflow-hidden flex-shrink-0 shadow-lg border border-white/10 cursor-pointer"
+                            onClick={() => setSelectedImage(item.image)}
+                          >
+                            <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" style={{ objectPosition: item.objectPosition || 'center' }} loading="lazy" />
+                          </div>
+
                         </div>
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                </div>
-              </motion.div>
-              <motion.div 
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="lg:col-span-7 order-1 lg:order-2 space-y-4 text-left"
-              >
-                <span className="text-gold uppercase tracking-widest text-[10px] font-bold">December 2025</span>
-                <h2 className="text-4xl md:text-5xl italic leading-tight text-white">Details <br/>Taking Shape</h2>
-                <p className="text-gray-300 font-sans text-lg leading-relaxed">
-                  As the arangetram slowly moved closer to reality, costume fittings, temple jewelry, and stage design began coming together piece by piece. What once existed only in imagination gradually transformed into the visual world of the performance.
-                </p>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-
-        <TimelineConnector 
-          fromDate="December 2025" 
-          toDate="February 2026" 
-          title="Preserving the Moment" 
-        />
-
-        {/* 4. PHOTOSHOOT SECTION */}
-        <section className="py-10 relative">
-          <div className="container-luxury text-center">
-            <motion.div 
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="max-w-2xl mx-auto mb-16"
-            >
-              <span className="text-gold uppercase tracking-widest text-[10px] font-bold mb-4 block">February 2026</span>
-              <h2 className="text-4xl md:text-5xl italic mb-6 text-white">Capturing the Artist</h2>
-              <p className="text-gray-300 font-sans text-lg leading-relaxed">
-                The photoshoot became more than preparation for an event; it became a way of preserving a moment suspended between student and performer.
-              </p>
-            </motion.div>
-            <motion.div 
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="relative px-4 md:px-12"
-            >
-              <Swiper
-                modules={[Autoplay, Navigation, Pagination]}
-                spaceBetween={30}
-                slidesPerView={1}
-                centeredSlides={true}
-                autoplay={{ delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true }}
-                loop={true}
-                pagination={{ clickable: true }}
-                navigation={true}
-                observer={true}
-                observeParents={true}
-                watchSlidesProgress={true}
-                preloadImages={false}
-                breakpoints={{
-                  640: { slidesPerView: 2 },
-                  1024: { slidesPerView: 3 },
-                }}
-                className="luxury-swiper photoshoot-carousel !pb-16"
-              >
-                {[
-                  { src: '/images/photoshoot-glimpses/Sanjana-110-Edit.webp', label: '' },
-                  { src: '/images/photoshoot-glimpses/Sanjana-69-Edit-2_tz_dramatic.webp', label: '' },
-                  { src: '/images/photoshoot-glimpses/Sanjana-187-Edit.webp', label: '' },
-                  { src: '/images/photoshoot-glimpses/Sanjana-689-Edit.webp', label: '' },
-                  { src: '/images/photoshoot-glimpses/Sanjana-318-Edit.webp', label: '' }
-                ].map((item, i) => (
-                  <SwiperSlide key={i}>
-                    <div className="relative aspect-[3/4] gold-border-gradient overflow-hidden rounded-xl group bg-white/5 border border-gold/20">
-                      <img 
-                        src={item.src} 
-                        alt={item.label} 
-                        className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-                        <span className="text-gold uppercase tracking-[0.3em] text-[10px] font-bold">{item.label}</span>
                       </div>
                     </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </motion.div>
-          </div>
-        </section>
 
-        <TimelineConnector 
-          fromDate="February 2026" 
-          toDate="May 2026" 
-          title="Sharing the Blessing" 
-        />
+                    {/* DESKTOP DATE STRING ON OPPOSITE SIDE (Hidden on mobile) */}
+                    <div className={`hidden md:flex w-[45%] ${isLeft ? 'justify-start pl-12' : 'justify-end pr-12'} items-center`}>
+                      <span className="text-gold uppercase tracking-[0.2em] text-[11px] font-bold drop-shadow-md opacity-80">
+                        {item.date}
+                      </span>
+                    </div>
 
-        {/* 5. THE FIRST INVITATION */}
-        <section className="py-10 relative bg-[#050505]/50">
-          <div className="container-luxury">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
-              <motion.div 
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="lg:col-span-7 space-y-4 text-left"
-              >
-                <span className="text-gold uppercase tracking-widest text-[10px] font-bold">May 2026</span>
-                <h2 className="text-4xl md:text-5xl italic leading-tight text-white">The <span className="text-gold">First Invitation</span></h2>
-                <p className="text-gray-300 font-sans text-lg leading-relaxed">
-                  Before reaching family and friends, the first invitation was offered to my gurus during a pooja — a quiet moment of gratitude, blessing, and the beginning of the final chapter leading to arangetram.
-                </p>
-              </motion.div>
-              <motion.div 
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="lg:col-span-5 max-w-[280px] mx-auto lg:max-w-none w-full glass-card gold-border-gradient p-4 bg-black/40 border border-gold/20"
-              >
-                <img src="/images/Invitation.webp" alt="Invitation" className="w-full h-full object-cover shadow-2xl" loading="lazy" decoding="async" />
-              </motion.div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
-        </section>
 
-        <TimelineConnector 
-          fromDate="May 2026" 
-          toDate="July 2026" 
-          title="The Stage Draws Near" 
-        />
+        </div>
+      </section>
 
-        {/* 6. STAGE REHEARSAL */}
-        <section className="py-10 relative">
-          <div className="container-luxury text-center">
-            <motion.div 
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="max-w-3xl mx-auto"
-            >
-              <span className="text-gold uppercase tracking-widest text-[10px] font-bold mb-4 block">July 1, 2026</span>
-              <h2 className="text-4xl md:text-5xl italic mb-6 text-white">First Steps onto the Stage</h2>
-              <p className="text-gold/60 uppercase tracking-[0.3em] text-[10px] font-bold mb-8 italic">— Coming Up —</p>
-              <p className="text-gray-300 font-sans text-xl leading-relaxed max-w-2xl mx-auto">
-                The first stage rehearsal transformed the performance from imagination into reality. Beneath the theater lights, familiar movements suddenly carried a different weight — marking the moment the journey toward arangetram finally began to feel real.
-              </p>
-            </motion.div>
-          </div>
-        </section>
-
-        <TimelineConnector 
-          title="From Practice to Performance" 
-        />
-
-        {/* 7. COUNTDOWN SECTION */}
-        <section className="py-12 border-t border-white/5 relative overflow-hidden bg-black text-center">
-          <div className="container-luxury relative z-10">
-            <motion.div 
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <p className="text-gold uppercase tracking-[0.5em] text-[10px] font-bold mb-10 block">July 25, 2026</p>
-              <h2 className="text-3xl md:text-4xl italic mb-6 text-white/80 font-serif">Days Until Arangetram</h2>
-              
-              <div className="relative inline-block">
-                <span className="text-8xl md:text-[10rem] font-serif text-gold drop-shadow-glow leading-none select-none">
-                  {daysLeft}
-                </span>
-                <div className="absolute -inset-10 border border-gold/5 rounded-full animate-pulse -z-10" />
-              </div>
-
-              <p className="mt-8 text-gray-300 font-sans text-lg max-w-2xl mx-auto leading-relaxed">
+      {/* 3. COUNTDOWN SECTION */}
+      <section className="py-16 relative overflow-hidden bg-[#050505] border-t border-white/5">
+        <div className="absolute inset-0 bg-[url('/images/photo_9.webp')] bg-cover opacity-5 grayscale" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-black/80" />
+        
+        <div className="container-luxury relative z-10">
+          <motion.div 
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="max-w-5xl mx-auto py-10 px-8 lg:px-16 glass-card gold-border-gradient bg-[#0A0A0A]/80 backdrop-blur-xl border border-gold/20 rounded-3xl shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-10"
+          >
+            <div className="text-center lg:text-left flex-1">
+              <p className="text-gold uppercase tracking-[0.5em] text-[10px] font-bold mb-4 block">July 25, 2026 • US EST</p>
+              <h2 className="text-3xl md:text-4xl italic mb-4 text-white font-serif leading-tight">The Countdown <br className="hidden lg:block"/>to Arangetram</h2>
+              <p className="text-gray-400 font-sans text-sm md:text-base leading-relaxed italic max-w-md mx-auto lg:mx-0">
                 “Every rehearsal now carries a different weight — the quiet realization that years of preparation are slowly approaching the stage.”
               </p>
-            </motion.div>
-          </div>
-        </section>
+            </div>
+            
+            <div className="flex items-center gap-4 md:gap-6 justify-center">
+              {[
+                { label: 'Days', value: timeLeft.days },
+                { label: 'Hours', value: timeLeft.hours },
+                { label: 'Mins', value: timeLeft.minutes },
+                { label: 'Secs', value: timeLeft.seconds }
+              ].map((time, idx) => (
+                <div key={idx} className="flex flex-col items-center">
+                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border border-gold/30 bg-black/50 flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.15)] relative overflow-hidden group">
+                    <div className="absolute inset-0 bg-gold/5 group-hover:bg-gold/10 transition-colors duration-500" />
+                    <span className="text-2xl md:text-3xl font-serif text-gold z-10 drop-shadow-md">
+                      {time.value.toString().padStart(2, '0')}
+                    </span>
+                  </div>
+                  <span className="text-[9px] md:text-[10px] text-gray-400 uppercase tracking-widest mt-3 font-bold">{time.label}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
-      </div>
+      {/* 4. LIGHTBOX MODAL */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md"
+            onClick={() => setSelectedImage(null)}
+          >
+            <button 
+              className="absolute top-6 right-6 text-white/50 hover:text-white z-[110] transition-colors p-2 bg-black/50 rounded-full border border-white/10"
+              onClick={() => setSelectedImage(null)}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <motion.img
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              src={selectedImage}
+              className="max-w-full max-h-[90vh] object-contain rounded-xl shadow-[0_0_50px_rgba(212,175,55,0.15)] border border-gold/10"
+              alt="Full view"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
     </div>
   );
 };
