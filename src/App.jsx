@@ -7,8 +7,9 @@ import Loader from './components/common/Loader'; // Assuming a Loader component 
 
 import './styles/index.css';
 
+import Home from './pages/Home';
+
 // Lazy load pages
-const Home = lazy(() => import('./pages/Home'));
 const RSVP = lazy(() => import('./pages/RSVP'));
 const Gallery = lazy(() => import('./pages/Gallery'));
 const About = lazy(() => import('./pages/About'));
