@@ -637,7 +637,7 @@ Through abhinaya, I have come to love the power of storytelling woven through cl
                   className="relative flex items-center md:justify-between group"
                 >
                   {/* Mobile layout: badge on left line, card on right */}
-                  <div className="absolute left-8 -translate-x-1/2 md:hidden w-12 h-12 rounded-full border-2 border-[#D4AF37] overflow-hidden z-10 bg-black shadow-lg flex-shrink-0">
+                  <div className="absolute left-8 -translate-x-1/2 md:hidden w-16 h-16 rounded-full border-2 border-[#D4AF37] overflow-hidden z-10 bg-black shadow-lg flex-shrink-0">
                     <img
                       src={item.image}
                       alt={item.title}
@@ -671,7 +671,7 @@ Through abhinaya, I have come to love the power of storytelling woven through cl
                   </div>
 
                   {/* Center Badge */}
-                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-16 h-16 rounded-full border-2 border-[#D4AF37] overflow-hidden z-10 bg-black shadow-[0_0_20px_rgba(212,175,55,0.2)] group-hover:scale-110 group-hover:border-white transition-all duration-500 flex-shrink-0">
+                  <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-24 h-24 rounded-full border-2 border-[#D4AF37] overflow-hidden z-10 bg-black shadow-[0_0_20px_rgba(212,175,55,0.2)] group-hover:scale-110 group-hover:border-white transition-all duration-500 flex-shrink-0">
                     <img
                       src={item.image}
                       alt={item.title}
