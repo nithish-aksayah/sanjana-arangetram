@@ -72,7 +72,7 @@ export const invitationData = {
   seo: {
     title: "Sanjana Diddige Arangetram RSVP",
     description:
-      "Official Bharatanatyam Arangetram invitation and RSVP website for Sanjana Diddige.",
+      "Bharatanatyam Arangetram invitation and RSVP website for Sanjana Diddige.",
   },
 
   social: {
