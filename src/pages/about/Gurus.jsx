@@ -68,7 +68,7 @@ const Gurus = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             
             {/* Image Column */}
-            <div className="lg:col-span-5 relative group mx-auto w-full max-w-sm lg:max-w-none">
+            <div className="lg:col-span-4 relative group mx-auto w-full max-w-sm lg:max-w-none">
               <motion.div 
                 variants={fadeUp}
                 initial="hidden"
@@ -89,7 +89,7 @@ const Gurus = () => {
             </div>
 
             {/* Content Column */}
-            <div className="lg:col-span-7 space-y-10 text-left">
+            <div className="lg:col-span-8 space-y-8 text-left">
               <motion.div 
                 variants={fadeUp}
                 initial="hidden"
@@ -101,21 +101,27 @@ const Gurus = () => {
                   <span className="uppercase tracking-widest text-[10px] font-bold">The Visionary Founder</span>
                 </div>
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-8 leading-tight text-white">Mrs. <span className="text-[#D4AF37]">Dina Sheth</span></h2>
-                <div className="space-y-6 text-gray-300 font-sans text-lg leading-relaxed">
+                <div className="space-y-4 text-gray-300 font-sans text-sm md:text-base leading-relaxed">
                   <p>
-                    Mrs. Dina Sheth is the visionary Founder of Kruti Dance Academy—a nationally and globally acclaimed institution dedicated to the preservation and evolution of Indian classical arts. Since its inception in 1994, Kruti has flourished under her passionate guidance, becoming a sanctuary where tradition meets transformation.
+                    Mrs. Dina Sheth is the visionary Founder of Kruti Dance Academy—a nationally and globally acclaimed institution dedicated to the preservation and evolution of Indian classical arts. Since its inception in 1994, Kruti has flourished under her passionate guidance, becoming a sanctuary where tradition meets transformation. With a vibrant repertoire encompassing Bharatanatyam, folk, and contemporary fusion, the academy serves as a cultural bridge, nurturing students of all ethnicities in the soulful legacy of Indian dance and heritage.
                   </p>
                   <p>
-                    A revered torchbearer of Bharatanatyam, Mrs. Sheth received her rigorous training under legendary Gurus: the late Shreemati Anjali Merh, the late Shree Kubernath Tanjorkar, Padma Bhushan C. V. Chandrashekhar, and the late Pradip Barua. Her artistry has been spotlighted by media outlets such as India Today, BBC UK Radio, and NBC Channel 11.
+                    A revered torchbearer of Bharatanatyam, Mrs. Sheth received her rigorous training under the tutelage of legendary Gurus: the late Shreemati Anjali Merh, the late Shree Kubernath Tanjorkar, Padma Bhushan C. V. Chandrashekhar, and the late Pradip Barua, at the esteemed College of Indian Music, Dance and Dramatics in Vadodara, Gujarat.
                   </p>
                   <p>
-                    Through dance, she bestows not only grace and discipline, but also identity, self-worth, and a lifelong bond with the timeless spirit of India.
+                    Over the years, her unwavering devotion has illuminated the stage for over 177 Arangetrams, each a testament to her excellence, depth of knowledge, and nurturing spirit. Her choreography is both rooted in tradition and elevated by imagination, earning her accolades from cultural, civic, and government bodies—including a distinguished Citation from the Secretary of State for Georgia for her outstanding contributions to the arts.
+                  </p>
+                  <p>
+                    Mrs. Sheth’s artistry and cultural leadership have been spotlighted by numerous media outlets, including India Today, BBC UK Radio, NBC Channel 11, and the Atlanta Journal-Constitution. Yet, her most profound recognition comes from the countless hearts she has touched.
+                  </p>
+                  <p>
+                    To her students, she is more than a teacher—she is a mentor, a guide, a second mother. Through dance, she bestows not only grace and discipline, but also identity, self-worth, cultural pride, and a lifelong bond with beauty, community, and the timeless spirit of India.
                   </p>
                 </div>
               </motion.div>
 
               {/* Stats Grid */}
-              <div className="grid grid-cols-3 gap-6 pt-10 border-t border-white/5">
+              {/* <div className="grid grid-cols-3 gap-4 md:gap-8 pt-10 border-t border-white/10">
                 {stats.map((stat, i) => (
                   <motion.div 
                     key={i}
@@ -124,21 +130,27 @@ const Gurus = () => {
                     whileInView="visible"
                     viewport={{ once: true }}
                     transition={{ delay: 0.2 + (i * 0.1) }}
-                    className="text-center p-6 glass-card border-white/5 bg-white/[0.02] hover:bg-gold/5 transition-all duration-500"
+                    className="relative text-center group py-4"
                   >
-                    <div className="text-gold flex justify-center mb-4">{stat.icon}</div>
-                    <div className="text-2xl font-serif text-white mb-1">{stat.value}</div>
-                    <div className="text-[9px] uppercase tracking-widest text-white/40 font-bold">{stat.label}</div>
+                    Vertical divider line
+                    {i < stats.length - 1 && (
+                      <div className="absolute right-0 top-1/4 bottom-1/4 w-px bg-gradient-to-b from-transparent via-gold/30 to-transparent" />
+                    )}
+                    <div className="text-gold flex justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
+                      {stat.icon}
+                    </div>
+                    <div className="text-3xl md:text-4xl font-serif text-white mb-2 tracking-wide font-medium">{stat.value}</div>
+                    <div className="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold group-hover:text-gold transition-colors duration-300">{stat.label}</div>
                   </motion.div>
                 ))}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
       </section>
 
       {/* 3. ACHIEVEMENTS & MEDIA SECTION */}
-      <section className="section-padding bg-[#050505]">
+      {/* <section className="section-padding bg-[#050505]">
         <div className="container-luxury">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
@@ -163,7 +175,7 @@ const Gurus = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* 4. MRS. SHEMONI PAREKH SECTION */}
       <section className="section-padding bg-black relative">
@@ -171,7 +183,7 @@ const Gurus = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center flex-row-reverse">
             
             {/* Content Column */}
-            <div className="lg:col-span-7 order-2 lg:order-1 space-y-10 text-left">
+            <div className="lg:col-span-8 order-2 lg:order-1 space-y-8 text-left">
               <motion.div 
                 variants={fadeUp}
                 initial="hidden"
@@ -183,21 +195,27 @@ const Gurus = () => {
                   <span className="uppercase tracking-widest text-[10px] font-bold">Artistic Director</span>
                 </div>
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-8 leading-tight text-white">Mrs. <span className="text-[#D4AF37]">Shemoni Parekh</span></h2>
-                <div className="space-y-6 text-gray-300 font-sans text-lg leading-relaxed">
+                <div className="space-y-4 text-gray-300 font-sans text-sm md:text-base leading-relaxed">
                   <p>
-                    As the Artistic Director of Kruti Dance Academy, Shemoni Parekh is a luminous force for masterful and innovative choreography. She embodies the unique confluence of Indian classical heritage melded with the flair and heartbeat of global modern dance styles.
+                    As the Artistic Director for the nationally renowned Kruti Dance Academy, Shemoni Parekh is a luminous force for masterful and innovative choreography of Indian dance. She embodies the unique confluence of Indian classical dance, the rich Indian heritage of a thousand years melded with the flair and heartbeat of dance styles of the modern era from across the globe.
                   </p>
                   <p>
-                    An Industrial Engineering honors graduate from Georgia Tech, Shemoni has integrated technology and virtual offerings into KDA, leading its transformation into a state-of-the-art facility.
+                    Shemoni’s journey in dance began at a tender age of 2 under the guidance of her mother, Dina Sheth, an accomplished and formally trained Bharatanatyam classical dancer and founder of Kruti Dance Academy. Shemoni has undergone rigorous Bharatanatyam training culminating in her Arangetram graduation ceremony in 2001. Shemoni is also an honors graduate in Industrial Engineering from Georgia Institute of Technology and has served as a Supply Chain Consultant with IBM in her past professional career.
                   </p>
                   <p>
-                    She serves as a cultural ambassador, featured by Google, Turner Classic Movies, and PBS’s Secret Atlanta, sharing the beauty of Indian heritage across diverse communities.
+                    Shemoni is deeply committed to bringing Indian culture into the community. She serves as rotating faculty at high schools and private schools throughout Georgia, where she shares the beauty and depth of Indian dance and heritage with students from diverse backgrounds. She has also been featured as a subject matter expert in multiple documentaries by Google, Turner Classic Movies FilmStruck, and PBS’s Secret Atlanta, highlighting her role as a cultural ambassador for Indian dance in the U.S.
+                  </p>
+                  <p>
+                    Shemoni has an extensive list of external achievements and recognitions to her credit, including choreography for So You Think You Can Dance Canada, leading a team to the finals of Colors TV Chak Dhoom Dhoom, leading a team to the finals of NBC’s America’s Got Talent, choreography for the nationally televised Kruti Dance Academy participation in Macy’s Thanksgiving Day Parade. Additionally, she has developed scripts and narration for film documentaries on dance by Turner Broadcasting Network and PBS.
+                  </p>
+                  <p>
+                    For the past 10 years Shemoni has led the transformation of KDA by leading the design of the new state-of-the-art dance facility, expanding the academy offerings across dance forms and age groups, incorporating technology for virtual offerings and student interactions, and elevating the academy’s annual dance concert to become a notable event in Atlanta’s artistic calendar.
                   </p>
                 </div>
               </motion.div>
 
               {/* Highlights Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
                   'America\'s Got Talent Finalist',
                   'Macy\'s Thanksgiving Day Parade',
@@ -216,11 +234,11 @@ const Gurus = () => {
                     <span className="text-xs uppercase tracking-widest text-white/80 group-hover:text-white">{item}</span>
                   </motion.div>
                 ))}
-              </div>
+              </div> */}
             </div>
 
             {/* Image Column */}
-            <div className="lg:col-span-5 order-1 lg:order-2 relative group mx-auto w-full max-w-sm lg:max-w-none">
+            <div className="lg:col-span-4 order-1 lg:order-2 relative group mx-auto w-full max-w-sm lg:max-w-none">
               <motion.div 
                 variants={fadeUp}
                 initial="hidden"
@@ -244,7 +262,7 @@ const Gurus = () => {
       </section>
 
       {/* 5. LEGACY SECTION */}
-      <section className="py-12 relative text-center bg-[#050505]">
+      <section className="relative text-center bg-[#050505]">
         <div className="container-luxury relative z-10">
           {/* <motion.div 
             variants={fadeUp}
