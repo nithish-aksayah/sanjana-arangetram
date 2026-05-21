@@ -3,11 +3,6 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { Shield, Sparkles, Heart, Quote, Star, BookOpen, X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 import DustParticles from '../../components/animations/DustParticles';
 
-// Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/free-mode';
 
 const highlights = [
   {
@@ -191,7 +186,7 @@ const SanjanaDiddige = () => {
             style={{ objectPosition: 'center 20%' }}
             loading="eager"
             decoding="async"
-            fetchpriority="high"
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30" />
         </div>
@@ -732,21 +727,24 @@ Through abhinaya, I have come to love the power of storytelling woven through cl
             <button 
               className="absolute top-8 right-8 w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-white/10 transition-colors"
               onClick={closeLightbox}
+              aria-label="Close lightbox"
             >
-              <X size={24} />
+              <X size={24} aria-hidden="true" />
             </button>
 
             <button 
+              aria-label="Previous award image"
               className="absolute left-4 md:left-8 w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-white/10 transition-colors" 
               onClick={prevImg}
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={24} aria-hidden="true" />
             </button>
             <button 
+              aria-label="Next award image"
               className="absolute right-4 md:right-8 w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-white/10 transition-colors" 
               onClick={nextImg}
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={24} aria-hidden="true" />
             </button>
             
             <motion.div 

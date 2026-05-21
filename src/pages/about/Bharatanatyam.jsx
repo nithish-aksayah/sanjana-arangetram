@@ -31,7 +31,7 @@ const Bharatanatyam = () => {
             style={{ objectPosition: 'center 21%' }}
             loading="eager"
             decoding="async"
-            fetchpriority="high"
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30" />
         </div>

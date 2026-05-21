@@ -56,7 +56,11 @@ const AboutSection = () => {
               <div className="relative z-10 w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                 <img 
                   src="/images/sanjana-about.webp" 
+                  srcSet="/images/sanjana-about-mobile.webp 768w, /images/sanjana-about.webp 800w"
+                  sizes="(max-width: 768px) 100vw, 400px"
                   alt="Sanjana Diddige" 
+                  width={800}
+                  height={800}
                   className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
                   loading="lazy"
                   decoding="async"

@@ -1,0 +1,12 @@
+# robots.txt for sanjanadiddige.com
+# Generated: 2026-05-21
+
+User-agent: *
+Allow: /
+
+# Disallow admin/backend paths (none currently, but future-proof)
+Disallow: /api/
+Disallow: /__firebase_hosting__/
+
+# Sitemap location (absolute URL required by spec)
+Sitemap: https://www.sanjanadiddige.com/sitemap.xml

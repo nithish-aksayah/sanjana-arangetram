@@ -164,8 +164,11 @@ const Navbar = () => {
             <button 
               className="text-white p-2"
               onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={isOpen}
+              aria-controls="mobile-nav-menu"
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              {isOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
             </button>
           </div>
         </div>
@@ -183,8 +186,9 @@ const Navbar = () => {
             <button 
               className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors"
               onClick={() => setIsOpen(false)}
+              aria-label="Close navigation menu"
             >
-              <X size={32} />
+              <X size={32} aria-hidden="true" />
             </button>
 
             <div className="flex flex-col items-center space-y-6 w-full px-8">
@@ -205,9 +209,12 @@ const Navbar = () => {
                         <button 
                           onClick={() => setMobileSubmenuOpen(mobileSubmenuOpen === link.name ? null : link.name)}
                           className="p-2"
+                          aria-label={`${mobileSubmenuOpen === link.name ? 'Collapse' : 'Expand'} ${link.name} submenu`}
+                          aria-expanded={mobileSubmenuOpen === link.name}
                         >
                           <ChevronDown 
                             size={20} 
+                            aria-hidden="true"
                             className={`text-gold/40 transition-transform duration-300 ${mobileSubmenuOpen === link.name ? 'rotate-180' : ''}`} 
                           />
                         </button>

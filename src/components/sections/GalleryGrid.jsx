@@ -76,10 +76,14 @@ const GallerySection = () => {
                 onClick={() => openLightbox(index)}
               >
                 <img 
-                  src={item.url} 
+                  src={item.url}
+                  srcSet={`${item.url.replace(/\.webp$/, '-mobile.webp')} 768w, ${item.url} 1400w`}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   alt={item.title} 
                   loading="lazy"
                   decoding="async"
+                  width={800}
+                  height={1000}
                   className="w-full h-auto object-cover transition-transform duration-700 md:group-hover:scale-110"
                 />
                 
@@ -124,19 +128,20 @@ const GallerySection = () => {
               <button 
                 className="group flex flex-col items-center gap-2 text-white/60 hover:text-white transition-all duration-300"
                 onClick={closeLightbox}
+                aria-label="Close lightbox"
               >
                 <div className="w-12 h-12 rounded-full bg-white/5 group-hover:bg-white/10 flex items-center justify-right border border-white/10 group-hover:border-white/20 transition-all">
-                  <X size={24} />
+                  <X size={24} aria-hidden="true" />
                 </div>
                 <span className="text-[10px] uppercase tracking-[0.3em] font-bold">Close</span>
               </button>
             </div>
 
-              <button className="absolute left-8 w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-white/10" onClick={prevImg}>
-                <ChevronLeft size={24} />
+              <button aria-label="Previous image" className="absolute left-8 w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-white/10" onClick={prevImg}>
+                <ChevronLeft size={24} aria-hidden="true" />
               </button>
-              <button className="absolute right-8 w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-white/10" onClick={nextImg}>
-                <ChevronRight size={24} />
+              <button aria-label="Next image" className="absolute right-8 w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-white/10" onClick={nextImg}>
+                <ChevronRight size={24} aria-hidden="true" />
               </button>
               
               <motion.div 

@@ -121,11 +121,17 @@ const Hero = memo(() => {
               {images.map((src, idx) => {
                 // Only render the first LCP image initially. Render slides 2 and 3 after page load is complete.
                 if (idx > 0 && !isMounted) return null;
+                // Derive mobile variant path: insert "-mobile" before the extension
+                const mobileSrc = src.replace(/\.webp$/, '-mobile.webp');
                 return (
                   <motion.img
                     key={src}
                     src={src}
+                    srcSet={`${mobileSrc} 768w, ${src} 1400w`}
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     alt={invitationData.event.dancerName}
+                    width={800}
+                    height={1000}
                     animate={{
                       opacity: idx === currentIndex ? 1 : 0,
                       scale: idx === currentIndex ? 1 : 1.05,
@@ -134,7 +140,7 @@ const Hero = memo(() => {
                     transition={{ duration: 1, ease: [0.4, 0, 0.2, 1] }}
                     className="absolute inset-0 w-full h-full object-cover drop-shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
                     loading={idx === 0 ? 'eager' : 'lazy'}
-                    fetchpriority={idx === 0 ? 'high' : 'low'}
+                    fetchPriority={idx === 0 ? 'high' : 'low'}
                     decoding="async"
                   />
                 );
@@ -144,23 +150,28 @@ const Hero = memo(() => {
               <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-6 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                 <button 
                   onClick={prevSlide}
+                  aria-label="Previous slide"
                   className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-gold hover:text-black transition-all"
                 >
-                  <ChevronLeft size={20} />
+                  <ChevronLeft size={20} aria-hidden="true" />
                 </button>
-                <div className="flex gap-2">
+                <div className="flex gap-2" role="tablist" aria-label="Slide indicators">
                   {images.map((_, idx) => (
                     <div 
-                      key={idx} 
+                      key={idx}
+                      role="tab"
+                      aria-selected={idx === currentIndex}
+                      aria-label={`Slide ${idx + 1}`}
                       className={`h-1 transition-all duration-500 rounded-full ${idx === currentIndex ? 'w-8 bg-gold' : 'w-2 bg-white/20'}`}
                     />
                   ))}
                 </div>
                 <button 
                   onClick={nextSlide}
+                  aria-label="Next slide"
                   className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-gold hover:text-black transition-all"
                 >
-                  <ChevronRight size={20} />
+                  <ChevronRight size={20} aria-hidden="true" />
                 </button>
               </div>
             </div>

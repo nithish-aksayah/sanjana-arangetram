@@ -326,25 +326,28 @@ const Gurus = () => {
               <button 
                 className="group flex flex-col items-center gap-2 text-white/60 hover:text-white transition-all duration-300"
                 onClick={() => setLightboxIndex(null)}
+                aria-label="Close lightbox"
               >
                 <div className="w-12 h-12 rounded-full bg-white/5 group-hover:bg-white/10 flex items-center justify-center border border-white/10 group-hover:border-white/20 transition-all">
-                  <X size={24} />
+                  <X size={24} aria-hidden="true" />
                 </div>
                 <span className="text-[10px] uppercase tracking-[0.3em] font-bold">Close</span>
               </button>
             </div>
 
             <button 
+              aria-label="Previous image"
               className="absolute left-4 md:left-12 w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-white/10 z-[110]" 
               onClick={(e) => { e.stopPropagation(); setLightboxIndex(p => p > 0 ? p - 1 : memoryImages.length - 1); }}
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={24} aria-hidden="true" />
             </button>
             <button 
+              aria-label="Next image"
               className="absolute right-4 md:right-12 w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-white/10 z-[110]" 
               onClick={(e) => { e.stopPropagation(); setLightboxIndex(p => p < memoryImages.length - 1 ? p + 1 : 0); }}
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={24} aria-hidden="true" />
             </button>
             
             <motion.div 

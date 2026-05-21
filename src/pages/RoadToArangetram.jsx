@@ -97,7 +97,7 @@ const RoadToArangetram = () => {
             style={{ objectPosition: 'center 30%' }}
             loading="eager"
             decoding="async"
-            fetchpriority="high"
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30" />
           {/* Decorative Accents */}
@@ -267,8 +267,9 @@ const RoadToArangetram = () => {
             <button 
               className="absolute top-6 right-6 text-white/50 hover:text-white z-[110] transition-colors p-2 bg-black/50 rounded-full border border-white/10"
               onClick={() => setSelectedImage(null)}
+              aria-label="Close lightbox"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
