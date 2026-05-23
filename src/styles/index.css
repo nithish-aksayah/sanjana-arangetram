@@ -112,3 +112,22 @@ h1, h2, h3, h4, h5, h6 {
 .luxury-swiper .swiper-pagination-bullet-active {
   @apply bg-gold scale-125;
 }
+
+/* Custom Mobile Menu Animations */
+@keyframes gold-shimmer {
+  0%, 70%, 100% {
+    opacity: 0.75;
+    text-shadow: 0 0 0px rgba(197, 160, 89, 0);
+    color: #C5A059;
+  }
+  85% {
+    opacity: 1;
+    text-shadow: 0 0 6px rgba(197, 160, 89, 0.45);
+    color: #E2C48D;
+  }
+}
+
+.animate-gold-shimmer {
+  animation: gold-shimmer 6s ease-in-out infinite;
+}
+

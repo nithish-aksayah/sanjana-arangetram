@@ -162,13 +162,22 @@ const Navbar = () => {
           {/* Mobile Menu Toggle */}
           <div className="flex lg:hidden w-full justify-end">
             <button 
-              className="text-white p-2"
+              className="flex flex-col items-center justify-center text-white focus:outline-none p-1.5 transition-colors duration-300"
               onClick={() => setIsOpen(!isOpen)}
               aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
               aria-expanded={isOpen}
               aria-controls="mobile-nav-menu"
             >
-              {isOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
+              {isOpen ? (
+                <X size={24} className="text-white/95" aria-hidden="true" />
+              ) : (
+                <>
+                  <Menu size={24} className="text-white/90 hover:text-white transition-colors mb-1" aria-hidden="true" />
+                  <span className="text-[9px] font-sans tracking-[0.25em] font-medium text-[#C5A059] uppercase animate-gold-shimmer leading-none">
+                    MENU
+                  </span>
+                </>
+              )}
             </button>
           </div>
         </div>
