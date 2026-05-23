@@ -115,19 +115,20 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Custom Mobile Menu Animations */
 @keyframes gold-shimmer {
-  0%, 70%, 100% {
-    opacity: 0.75;
+  0%, 55%, 100% {
+    opacity: 0.65;
     text-shadow: 0 0 0px rgba(197, 160, 89, 0);
     color: #C5A059;
+    transform: translate3d(0, 0, 0);
   }
-  85% {
+  75% {
     opacity: 1;
-    text-shadow: 0 0 6px rgba(197, 160, 89, 0.45);
-    color: #E2C48D;
+    text-shadow: 0 0 12px rgba(197, 160, 89, 0.5);
+    color: #EBE1CB;
+    transform: translate3d(0, -1px, 0);
   }
 }
 
 .animate-gold-shimmer {
-  animation: gold-shimmer 6s ease-in-out infinite;
+  animation: gold-shimmer 4.5s ease-in-out infinite;
 }
-
