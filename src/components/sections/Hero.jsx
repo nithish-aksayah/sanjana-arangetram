@@ -15,6 +15,9 @@ const Hero = memo(() => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
+  
+  // Use a simple check for mobile to prevent rendering heavy DOM elements.
+  const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
 
   // Delay rendering/fetching slides 2 and 3 until after initial page load is fully complete
   useEffect(() => {
@@ -34,10 +37,14 @@ const Hero = memo(() => {
 
   return (
     <section className="relative min-h-[90vh] lg:min-h-screen flex items-center bg-black overflow-hidden pt-24 lg:pt-0">
-      {/* Background Decorative Glows */}
-      <DustParticles />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/10 rounded-full blur-[150px] pointer-events-none"></div>
-      <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-gold/5 rounded-full blur-[120px] pointer-events-none"></div>
+      {/* Background Decorative Glows - Disabled on mobile to save DOM nodes & execution time */}
+      {!isMobile && (
+        <>
+          <DustParticles />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/10 rounded-full blur-[150px] pointer-events-none"></div>
+          <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-gold/5 rounded-full blur-[120px] pointer-events-none"></div>
+        </>
+      )}
 
       <div className="container-luxury relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
@@ -102,7 +109,7 @@ const Hero = memo(() => {
 
           {/* Right Image Column */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.98 }}
+            initial={{ opacity: 1, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="w-full lg:w-1/2 relative order-1 lg:order-2"
