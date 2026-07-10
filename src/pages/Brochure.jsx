@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useAnimation } from 'framer-motion';
 import * as PageFlipModule from 'page-flip';
 import { ChevronLeft, ChevronRight, Maximize2, ZoomIn, ZoomOut, Download } from 'lucide-react';
 import DustParticles from '../components/animations/DustParticles';
@@ -7,21 +7,30 @@ import DustParticles from '../components/animations/DustParticles';
 // Safely extract the PageFlip constructor regardless of how Vite resolves the CJS/ESM module
 const PageFlip = PageFlipModule.PageFlip || (PageFlipModule.default && PageFlipModule.default.PageFlip) || PageFlipModule;
 
-const images = Array.from({ length: 16 }, (_, i) => `/images/Program Brochures/Brochure Pg-${i + 1}.jpg`);
+const images = Array.from({ length: 16 }, (_, i) => `/images/Program Brochures/Brochure Pg-${i + 1}.webp`);
 
 // Static Book Pages component to prevent React from re-rendering the manipulated DOM
 const BookPages = React.memo(() => {
   return (
     <>
       {images.map((src, index) => (
-        <div key={index} className="page bg-[#050505] overflow-hidden flex items-center justify-center shadow-[inset_0_0_30px_rgba(0,0,0,0.9)] border border-gold/10" data-density="hard">
-          <img 
-            src={src} 
-            alt={`Brochure Page ${index + 1}`} 
+        <div
+          key={index}
+          className="page overflow-hidden flex items-center justify-center"
+          style={{ background: '#0a0a0a' }}
+          data-density="hard"
+        >
+          <img
+            src={src}
+            alt={`Brochure Page ${index + 1}`}
             className="w-full h-full object-contain"
             draggable={false}
+            style={{ willChange: 'transform' }}
           />
-          <div className={`absolute inset-y-0 ${index % 2 === 0 ? 'left-0 bg-gradient-to-r' : 'right-0 bg-gradient-to-l'} w-12 from-black/80 via-black/20 to-transparent pointer-events-none`}></div>
+          {/* Subtle spine shadow overlay */}
+          <div
+            className={`absolute inset-y-0 ${index % 2 === 0 ? 'left-0 bg-gradient-to-r' : 'right-0 bg-gradient-to-l'} w-8 from-black/50 via-black/10 to-transparent pointer-events-none`}
+          />
         </div>
       ))}
     </>
@@ -37,20 +46,23 @@ const Brochure = () => {
   const [zoomLevel, setZoomLevel] = useState(1);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [flipbookError, setFlipbookError] = useState(null);
-  
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFlipping, setIsFlipping] = useState(false);
+  const floatControls = useAnimation();
+
   // Responsive handling
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  
+
   const isMobile = windowWidth < 768;
 
-  // Initialize PageFlip safely
+  // Initialize PageFlip safely with premium slow settings
   useEffect(() => {
     let timeoutId;
-    
+
     if (bookContainerRef.current) {
       if (pageFlipRef.current) {
         pageFlipRef.current.destroy();
@@ -63,23 +75,40 @@ const Brochure = () => {
           const flipBook = new PageFlip(bookContainerRef.current, {
             width: 900,
             height: 1272,
-            size: "stretch",
+            size: 'stretch',
             minWidth: 280,
             maxWidth: 1800,
             minHeight: 396,
             maxHeight: 2500,
-            maxShadowOpacity: 0.6,
+            maxShadowOpacity: 0.35,   // Softer shadow for premium feel
             showCover: true,
             mobileScrollSupport: true,
-            useMouseEvents: true
+            useMouseEvents: true,
+            swipeDistance: 30,
+            clickEventForward: false,
           });
 
           const pages = bookContainerRef.current.querySelectorAll('.page');
           if (pages.length > 0) {
             flipBook.loadFromHTML(pages);
-            
+
             flipBook.on('flip', (e) => {
               setCurrentPage(e.data);
+            });
+
+            // Pause float during flip to prevent positional drift
+            flipBook.on('changeState', (e) => {
+              if (e.data === 'flipping') {
+                setIsFlipping(true);
+                floatControls.stop();
+                floatControls.set({ y: 0 });
+              } else {
+                setIsFlipping(false);
+                floatControls.start({
+                  y: [0, -5, 0],
+                  transition: { duration: 5, repeat: Infinity, ease: 'easeInOut' },
+                });
+              }
             });
 
             pageFlipRef.current = flipBook;
@@ -89,8 +118,8 @@ const Brochure = () => {
             setFlipbookError('No .page elements found inside container');
           }
         } catch (error) {
-          console.error("PageFlip initialization error:", error);
-          setFlipbookError(error.toString() + "\n" + error.stack);
+          console.error('PageFlip initialization error:', error);
+          setFlipbookError(error.toString() + '\n' + error.stack);
         }
       }, 100);
     }
@@ -137,21 +166,42 @@ const Brochure = () => {
   const handleZoomIn = () => setZoomLevel(prev => Math.min(prev + 0.5, 3));
   const handleZoomOut = () => setZoomLevel(prev => Math.max(prev - 0.5, 1));
 
+  // Start float animation on mount
+  useEffect(() => {
+    floatControls.start({
+      y: [0, -5, 0],
+      transition: { duration: 5, repeat: Infinity, ease: 'easeInOut' },
+    });
+  }, [floatControls]);
+
   return (
     <div className="bg-black min-h-screen pt-24 pb-8 md:pb-12 relative overflow-hidden flex flex-col items-center">
       <DustParticles />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vh] bg-gold/5 rounded-full blur-[150px] pointer-events-none z-0"></div>
+
+      {/* Cinematic vignette overlay */}
+      <div className="pointer-events-none fixed inset-0 z-0"
+        style={{ background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.75) 100%)' }}
+      />
+
+      {/* Multi-layered golden ambient glow behind book */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[65vh] rounded-full pointer-events-none z-0"
+        style={{ background: 'radial-gradient(ellipse, rgba(212,175,55,0.07) 0%, rgba(212,175,55,0.03) 40%, transparent 70%)', filter: 'blur(60px)' }}
+      />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40vw] h-[40vh] rounded-full pointer-events-none z-0"
+        style={{ background: 'radial-gradient(ellipse, rgba(212,175,55,0.05) 0%, transparent 70%)', filter: 'blur(80px)' }}
+      />
 
       <div className="container-luxury w-full max-w-7xl mx-auto px-2 md:px-4 z-10 flex flex-col items-center h-full">
-        
+
+        {/* Premium heading — slide down */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -28 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-6 md:mb-8 relative z-20"
         >
           <h1 className="font-cursive text-4xl md:text-6xl text-white mb-2 md:mb-4">Program Brochure</h1>
-          <div className="section-title-divider mx-auto mb-4 md:mb-6 hidden md:block"></div>
+          <div className="section-title-divider mx-auto mb-4 md:mb-6 hidden md:block" />
           <p className="text-gray-400 text-xs md:text-sm tracking-widest max-w-2xl mx-auto leading-relaxed hidden md:block">
             Explore the complete sequence of performances, artists, acknowledgements and the artistic journey of the Arangetram.
           </p>
@@ -163,69 +213,129 @@ const Brochure = () => {
             <pre className="text-xs text-red-300 max-w-2xl overflow-auto whitespace-pre-wrap text-left p-4 bg-black/40 rounded">{flipbookError}</pre>
           </div>
         ) : (
+          /* Book — cinematic slide-up + scale entry, then gentle float */
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="w-full flex justify-center relative perspective-1000 mb-6 md:mb-8"
-            style={{ height: '90vh', minHeight: '520px' }}
+            initial={{ opacity: 0, y: 70, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1.1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="w-full flex justify-center relative perspective-[2000px] mb-6 md:mb-8"
+            style={{ height: '95vh', minHeight: '540px' }}
           >
-            <div 
+            {/* Floating wrapper — pauses during flip to keep PageFlip position accurate */}
+            <motion.div
+              animate={floatControls}
               className="relative w-full h-full flex justify-center items-center"
-              style={{ transform: `scale(${zoomLevel})`, transition: 'transform 0.3s ease', transformOrigin: 'center center' }}
+              style={{ willChange: 'transform' }}
             >
-              
-              {/* PageFlip Container */}
-              <div 
-                ref={bookContainerRef} 
-                className="flipbook-wrapper drop-shadow-2xl mx-auto rounded-lg w-full h-full"
+              {/* Zoom + hover scale wrapper — frozen during flip for accurate PageFlip measurement */}
+              <div
+                className="relative w-full h-full flex justify-center items-center"
+                style={{
+                  transform: isFlipping ? 'scale(1)' : `scale(${zoomLevel * (isHovered ? 1.015 : 1)})`,
+                  transition: isFlipping ? 'none' : 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
+                  transformOrigin: 'center center',
+                }}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
               >
-                <BookPages />
-              </div>
+                {/* Luxury book shadow + glow */}
+                <div
+                  className="absolute inset-0 pointer-events-none rounded-lg transition-all duration-700"
+                  style={{
+                    boxShadow: isHovered
+                      ? '0 60px 120px rgba(0,0,0,0.85), 0 0 80px rgba(212,175,55,0.10), 0 0 200px rgba(0,0,0,0.6)'
+                      : '0 40px 90px rgba(0,0,0,0.8), 0 0 60px rgba(212,175,55,0.06), 0 0 160px rgba(0,0,0,0.5)',
+                  }}
+                />
 
-            </div>
+                {/* Gold border ring around the book */}
+                <div
+                  className="absolute inset-0 pointer-events-none rounded-lg transition-all duration-700 z-10"
+                  style={{
+                    boxShadow: isHovered
+                      ? 'inset 0 0 0 1px rgba(212,175,55,0.25)'
+                      : 'inset 0 0 0 1px rgba(212,175,55,0.12)',
+                  }}
+                />
+
+                {/* PageFlip Container — no transform applied here; transforms live on parent only */}
+                <div
+                  ref={bookContainerRef}
+                  className="brochure-flipbook mx-auto w-full h-full"
+                >
+                  <BookPages />
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         )}
 
+        {/* Premium Controls Bar */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="glass-card px-4 md:px-8 py-3 rounded-full flex items-center justify-between md:justify-center gap-4 md:gap-8 border border-gold/20 shadow-[0_0_30px_rgba(0,0,0,0.5)] z-20 w-[90%] md:w-auto mx-auto"
+          transition={{ duration: 0.9, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="brochure-controls-bar z-20 w-[95%] md:w-auto mx-auto"
         >
+          {/* Navigation */}
           <div className="flex items-center gap-2 md:gap-4">
-            <button onClick={prevButtonClick} className="w-10 h-10 rounded-full bg-white/5 hover:bg-gold/20 flex items-center justify-center text-white transition-all border border-transparent hover:border-gold/30">
+            <button
+              onClick={prevButtonClick}
+              className="brochure-ctrl-btn"
+              title="Previous Page"
+            >
               <ChevronLeft size={20} />
             </button>
-            <span className="text-white/80 font-serif text-sm tracking-widest min-w-[70px] text-center">
+            <span className="text-white/80 font-serif text-sm tracking-widest min-w-[70px] text-center select-none">
               {currentPage + 1} / {images.length}
             </span>
-            <button onClick={nextButtonClick} className="w-10 h-10 rounded-full bg-white/5 hover:bg-gold/20 flex items-center justify-center text-white transition-all border border-transparent hover:border-gold/30">
+            <button
+              onClick={nextButtonClick}
+              className="brochure-ctrl-btn"
+              title="Next Page"
+            >
               <ChevronRight size={20} />
             </button>
           </div>
 
-          <div className="w-px h-8 bg-white/10 hidden md:block"></div>
+          <div className="w-px h-8 bg-white/10 hidden md:block" />
 
+          {/* Zoom & Utility */}
           <div className="flex items-center gap-1 md:gap-3">
-            <button onClick={handleZoomOut} className="w-10 h-10 rounded-full hover:bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all hidden md:flex" title="Zoom Out">
+            <button onClick={handleZoomOut} className="brochure-ctrl-btn hidden md:flex" title="Zoom Out">
               <ZoomOut size={18} />
             </button>
-            <button onClick={handleZoomIn} className="w-10 h-10 rounded-full hover:bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all hidden md:flex" title="Zoom In">
+            <button onClick={handleZoomIn} className="brochure-ctrl-btn hidden md:flex" title="Zoom In">
               <ZoomIn size={18} />
             </button>
-            
-            <div className="w-px h-8 bg-white/10 hidden md:block mx-2"></div>
-            
-             <button onClick={toggleFullscreen} className="w-10 h-10 rounded-full hover:bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all" title="Fullscreen">
+
+            <div className="w-px h-8 bg-white/10 hidden md:block mx-1" />
+
+            <button onClick={toggleFullscreen} className="brochure-ctrl-btn" title="Fullscreen">
               <Maximize2 size={18} />
             </button>
-            
-            <a href="/images/Program Brochures/Brochure Pg-1.jpg" download className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition-all text-xs tracking-widest uppercase ml-2 border border-white/10 hover:border-white/30" title="Download Brochure">
-              <Download size={14} /> Download
+
+            <a
+              href="/images/Program Brochures/Brochure Pg-1.jpg"
+              download
+              className="brochure-download-btn hidden md:flex"
+              title="Download Brochure"
+            >
+              <Download size={14} />
+              <span>Download</span>
             </a>
           </div>
         </motion.div>
+
+        {/* Keyboard hint */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="text-white/20 text-xs tracking-widest mt-4 select-none hidden md:block"
+        >
+          ← → Arrow keys to navigate
+        </motion.p>
 
       </div>
     </div>
