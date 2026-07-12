@@ -392,43 +392,43 @@ const Brochure = () => {
           className="brochure-controls-bar z-20 w-[95%] md:w-auto mx-auto"
         >
           {/* Navigation */}
-          <div className="flex items-center gap-2 md:gap-4">
+          <div className="flex items-center gap-1 sm:gap-2 md:gap-4">
             <button onClick={prevButtonClick} className="brochure-ctrl-btn" title="Previous Page">
-              <ChevronLeft size={20} />
+              <ChevronLeft size={18} className="md:w-5 md:h-5" />
             </button>
-            <span className="text-white/80 font-serif text-sm tracking-widest min-w-[70px] text-center select-none">
+            <span className="text-white/80 font-serif text-xs md:text-sm tracking-widest min-w-[50px] md:min-w-[70px] text-center select-none">
               {currentPage + 1} / {images.length}
             </span>
             <button onClick={nextButtonClick} className="brochure-ctrl-btn" title="Next Page">
-              <ChevronRight size={20} />
+              <ChevronRight size={18} className="md:w-5 md:h-5" />
             </button>
           </div>
 
-          <div className="w-px h-8 bg-white/10 hidden md:block" />
+          <div className="w-px h-6 md:h-8 bg-white/10 hidden sm:block mx-1" />
 
           {/* Zoom & Utility */}
-          <div className="flex items-center gap-1 md:gap-3">
-            <button onClick={handleZoomOut} className="brochure-ctrl-btn hidden md:flex" title="Zoom Out">
-              <ZoomOut size={18} />
+          <div className="flex items-center gap-1 sm:gap-2 md:gap-3">
+            <button onClick={handleZoomOut} className="brochure-ctrl-btn" title="Zoom Out">
+              <ZoomOut size={16} className="md:w-[18px] md:h-[18px]" />
             </button>
-            <button onClick={handleZoomIn} className="brochure-ctrl-btn hidden md:flex" title="Zoom In">
-              <ZoomIn size={18} />
+            <button onClick={handleZoomIn} className="brochure-ctrl-btn" title="Zoom In">
+              <ZoomIn size={16} className="md:w-[18px] md:h-[18px]" />
             </button>
 
-            <div className="w-px h-8 bg-white/10 hidden md:block mx-1" />
+            <div className="w-px h-6 md:h-8 bg-white/10 hidden sm:block mx-1" />
 
             <button onClick={toggleFullscreen} className="brochure-ctrl-btn" title="Fullscreen">
-              <Maximize2 size={18} />
+              <Maximize2 size={16} className="md:w-[18px] md:h-[18px]" />
             </button>
 
             <button
               onClick={handleDownloadZip}
-              className="brochure-download-btn hidden md:flex disabled:opacity-50"
+              className="brochure-download-btn disabled:opacity-50"
               title="Download Brochure"
               disabled={isDownloading}
             >
-              <Download size={14} />
-              <span>{isDownloading ? 'Zipping...' : 'Download'}</span>
+              <Download size={14} className="md:w-[14px] md:h-[14px]" />
+              <span className="hidden md:inline">{isDownloading ? 'Zipping...' : 'Download'}</span>
             </button>
           </div>
         </motion.div>

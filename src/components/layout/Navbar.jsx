@@ -39,14 +39,14 @@ const Navbar = () => {
     { name: 'Home', path: '/' },
     { 
       name: 'About', 
-      path: '/about/sanjana-diddige',
+      path: '/about',
       submenu: [
-        { name: 'Bharatanatyam', path: '/about/bharatanatyam' },
-        { name: 'Our Gurus', path: '/about/gurus' },
-        { name: 'Sanjana Diddige', path: '/about/sanjana-diddige' },
+        { name: 'About', path: '/about' },
+        { name: 'Road to Arangetram', path: '/road-to-arangetram' },
+        { name: 'Acknowledgements', path: '/about/acknowledgements' },
+        { name: 'Orchestra', path: '/about/orchestra' },
       ]
     },
-     { name: 'Road to Arangetram', path: '/road-to-arangetram' },
     { name: 'Invitation', path: '/invitation' },
     { name: 'Program Brochure', path: '/brochure' },
     { name: 'Gallery', path: '/gallery' },

@@ -16,6 +16,8 @@ const About = lazy(() => import('./pages/About'));
 const Bharatanatyam = lazy(() => import('./pages/about/Bharatanatyam'));
 const Gurus = lazy(() => import('./pages/about/Gurus'));
 const SanjanaDiddige = lazy(() => import('./pages/about/Sanjana'));
+const Acknowledgements = lazy(() => import('./pages/about/Acknowledgements'));
+const Orchestra = lazy(() => import('./pages/about/Orchestra'));
 const Invitation = lazy(() => import('./pages/Invitation'));
 const Guestbook = lazy(() => import('./pages/Guestbook'));
 const Brochure = lazy(() => import('./pages/Brochure'));
@@ -40,6 +42,8 @@ function App() {
               <Route path="/about/bharatanatyam" element={<Bharatanatyam />} />
               <Route path="/about/gurus" element={<Gurus />} />
               <Route path="/about/sanjana-diddige" element={<SanjanaDiddige />} />
+              <Route path="/about/acknowledgements" element={<Acknowledgements />} />
+              <Route path="/about/orchestra" element={<Orchestra />} />
               <Route path="/invitation" element={<Invitation />} />
               <Route path="/brochure" element={<Brochure />} />
               <Route path="/rsvp" element={<RSVP />} />
