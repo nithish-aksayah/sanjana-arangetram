@@ -24,8 +24,8 @@ const acknowledgementsData = [
     location: 'Atlanta, Georgia'
   },
   {
-    category: 'Invitations, Print Materials,\nWebsite & Slideshow',
-    person: 'Sudhaan',
+    category: 'Invitation, Brochure, Visitor Book, Print Materials & Journey Video',
+    person: 'Sudhan',
     location: 'Coimbatore, India'
   },
   {
@@ -42,6 +42,12 @@ const acknowledgementsData = [
     category: 'Theatre Event Manager',
     person: 'Alison Greer',
     location: 'Gas South Theatre'
+  },
+  {
+    category: 'Website Design & Development',
+    person: 'NG Stellar',
+    location: 'Coimbatore, India',
+    link: 'https://ngstellar.com/'
   }
 ];
 
@@ -82,16 +88,16 @@ const Acknowledgements = () => {
       {/* ── PEOPLE GRID ── */}
       <section className="section-padding bg-[#0A0505]">
         <div className="container-luxury max-w-5xl">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-             <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">
-                People Behind the Celebration
-             </h2>
-             <div className="w-16 h-px bg-[#D4AF37] mx-auto opacity-50" />
+            <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">
+              People Behind the Celebration
+            </h2>
+            <div className="w-16 h-px bg-[#D4AF37] mx-auto opacity-50" />
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
@@ -102,16 +108,28 @@ const Acknowledgements = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="border border-[#D4AF37]/30 rounded-xl p-8 flex flex-col items-center text-center bg-black/40 hover:bg-[#D4AF37]/5 transition-colors duration-500"
+                className="group relative overflow-hidden border border-[#D4AF37]/20 rounded-2xl p-8 lg:p-10 flex flex-col items-center text-center bg-gradient-to-b from-black/80 to-[#1a1500]/40 backdrop-blur-sm hover:border-[#D4AF37]/50 hover:shadow-[0_8px_32px_rgba(212,175,55,0.15)] hover:-translate-y-1 transition-all duration-500"
               >
-                <h3 className="text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] font-bold mb-4 whitespace-pre-line">
+                {/* Subtle top highlight */}
+                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Background glow on hover */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[#D4AF37]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                <h3 className="relative z-10 text-[11px] uppercase tracking-[0.3em] text-[#D4AF37] font-bold mb-4 whitespace-pre-line group-hover:text-[#F3E5AB] transition-colors duration-300">
                   {item.category}
                 </h3>
-                <p className="font-serif text-2xl text-white mb-2 whitespace-pre-line">
-                  {item.person}
+                <p className="relative z-10 font-serif text-2xl md:text-3xl text-white mb-3 whitespace-pre-line">
+                  {item.link ? (
+                    <a href={item.link} target="_blank" rel="noopener noreferrer" className="hover:text-[#D4AF37] transition-colors duration-300">
+                      {item.person}
+                    </a>
+                  ) : (
+                    item.person
+                  )}
                 </p>
                 {item.location && (
-                  <p className="text-white/60 text-sm tracking-wider uppercase font-sans">
+                  <p className="relative z-10 text-white/50 text-sm tracking-[0.15em] uppercase font-sans group-hover:text-white/70 transition-colors duration-300">
                     {item.location}
                   </p>
                 )}

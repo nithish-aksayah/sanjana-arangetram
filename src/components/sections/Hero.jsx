@@ -36,7 +36,7 @@ const Hero = memo(() => {
   const prevSlide = useCallback(() => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length), [images.length]);
 
   return (
-    <section className="relative min-h-[90vh] lg:min-h-screen flex items-center bg-black overflow-hidden pt-24 lg:pt-0">
+    <section className="relative min-h-[90vh] lg:min-h-screen flex items-center bg-black overflow-hidden pt-32 lg:pt-24">
       {/* Background Decorative Glows - Disabled on mobile to save DOM nodes & execution time */}
       {!isMobile && (
         <>
