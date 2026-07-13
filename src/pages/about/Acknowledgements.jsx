@@ -26,7 +26,8 @@ const acknowledgementsData = [
   {
     category: 'Invitation, Brochure, Visitor Book, Print Materials & Journey Video',
     person: 'Sudhan',
-    location: 'Coimbatore, India'
+    location: 'Coimbatore, India',
+    link: 'https://www.behance.net/sudhan'
   },
   {
     category: 'Event Décor',
@@ -112,7 +113,7 @@ const Acknowledgements = () => {
               >
                 {/* Subtle top highlight */}
                 <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
+
                 {/* Background glow on hover */}
                 <div className="absolute inset-0 bg-gradient-to-b from-[#D4AF37]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
