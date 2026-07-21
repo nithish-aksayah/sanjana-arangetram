@@ -2,6 +2,25 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import DustParticles from '../../components/animations/DustParticles';
 
+const InstagramIcon = ({ size = 24, className = "" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
+
 const fadeUp = {
   initial: { opacity: 0, y: 15 },
   whileInView: { opacity: 1, y: 0 },
@@ -49,6 +68,11 @@ const acknowledgementsData = [
     person: 'NG Stellar',
     location: 'Coimbatore, India',
     link: 'https://ngstellar.com/'
+  },
+  {
+    category: 'Jewellery Design and Making',
+    person: 'VDesign4U',
+    link: 'https://www.instagram.com/vdesign4u.official?utm_source=qr&igsh=MXA0cnlhNm4yYmQwMg=='
   }
 ];
 
@@ -133,6 +157,11 @@ const Acknowledgements = () => {
                   <p className="relative z-10 text-white/50 text-sm tracking-[0.15em] uppercase font-sans group-hover:text-white/70 transition-colors duration-300">
                     {item.location}
                   </p>
+                )}
+                {item.link && item.link.includes('instagram.com') && (
+                  <a href={item.link} target="_blank" rel="noopener noreferrer" className="relative z-10 mt-4 text-[#D4AF37]/70 hover:text-[#D4AF37] hover:scale-110 transition-all duration-300">
+                    <InstagramIcon size={28} />
+                  </a>
                 )}
               </motion.div>
             ))}

@@ -127,8 +127,8 @@ export const invitationData = {
   },
   watchLive: {
     title: "Watch Live",
-    subtitle: "Coming Soon",
-    description: "Join us virtually to witness Sanjana's Arangetram. The live stream link will be available here on the day of the event.",
+    videoUrl: "https://www.youtube.com/embed/-ARixvKoFsE",
+    description: "Join us virtually to witness Sanjana's Arangetram.",
   },
   guestbook: [
    
